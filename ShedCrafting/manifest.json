@@ -1,0 +1,28 @@
+{
+  /*
+   | This file is automatically updated by ModManifestBuilder
+   | when the project is compiled.
+   | 
+   | Changes made to this file may be overwritten.
+   | 
+   */
+  "$schema": "https://smapi.io/schemas/manifest.json",
+  "UniqueID": "EternalSoap.ShedCrafting",
+  "Name": "ShedCrafting",
+  "Author": "EternalSoap",
+  "Version": "1.0.0-Debug",
+  "Description": "Adds Chest Inside Building To Crafting Station",
+  "MinimumApiVersion": "4.5.2",
+  "MinimumGameVersion": "1.6",
+  "EntryDll": "ShedCrafting.dll",
+  "Dependencies": [
+    {
+      "UniqueID": "leclair.bettercrafting",
+      "MinimumVersion": "2.18.0",
+      "IsRequired": false
+    }
+  ],
+  "UpdateKeys": [
+    "Nexus:12345"
+  ]
+}
