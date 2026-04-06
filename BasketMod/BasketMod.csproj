@@ -5,13 +5,12 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
         <LangVersion>10</LangVersion>
-        <EnableHarmony>true</EnableHarmony>
 
         <!-- Manifest fields -->
-        <Name>ShedCrafting</Name>
+        <Name>BasketMod</Name>
         <Authors>EternalSoap</Authors>
-        <Description>Adds Chest Inside Building To Crafting Station</Description>
-        <UniqueID>EternalSoap.ShedCrafting</UniqueID>
+        <Description>View the Inventory of your Shed as a big Chest</Description>
+        <UniqueID>EternalSoap.BasketMod</UniqueID>
         <MinimumGameVersion>1.6</MinimumGameVersion>
         <MinimumApiVersion>4.5.2</MinimumApiVersion>
         <UpdateKeys>Nexus:12345</UpdateKeys>

@@ -3,7 +3,6 @@ using ShedCrafting.Apis;
 using ShedCrafting.integration;
 using StardewModdingAPI;
 using StardewModdingAPI.Events;
-using StardewValley.Objects;
 
 namespace ShedCrafting;
 
@@ -29,11 +28,7 @@ public class ModEntry : Mod
     private void Harmony()
     {
         var harmony = new Harmony(ModManifest.UniqueID);
-        harmony.Patch(
-            original: AccessTools.Method(typeof(Workbench), nameof(Workbench.checkForAction)),
-            postfix: new HarmonyMethod(typeof(ShedCrafting.WorkbenchListener),
-                nameof(ShedCrafting.WorkbenchListener.CheckForAction_PostFix))
-        );
+        ShedCrafting.Patches.Apply(harmony);
     }
 
 

@@ -7,19 +7,18 @@
    | 
    */
   "$schema": "https://smapi.io/schemas/manifest.json",
-  "UniqueID": "EternalSoap.ShedCrafting",
-  "Name": "ShedCrafting",
+  "UniqueID": "EternalSoap.ShedMonitor",
+  "Name": "ShedMonitor",
   "Author": "EternalSoap",
   "Version": "1.0.0-Debug",
-  "Description": "Adds Chest Inside Building To Crafting Station",
+  "Description": "View the Inventory of your Shed as a big Chest",
   "MinimumApiVersion": "4.5.2",
   "MinimumGameVersion": "1.6",
-  "EntryDll": "ShedCrafting.dll",
+  "EntryDll": "ShedMonitor.dll",
   "Dependencies": [
     {
-      "UniqueID": "leclair.bettercrafting",
-      "MinimumVersion": "2.18.0",
-      "IsRequired": false
+      "UniqueID": "focustense.StardewUI",
+      "MinimumVersion": "0.6.1"
     }
   ],
   "UpdateKeys": [

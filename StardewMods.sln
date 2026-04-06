@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BasketMod", "BasketMod\BasketMod.csproj", "{5F7BE9D4-1533-436E-8ADA-14BC81764F99}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShedCrafting", "ShedCrafting\ShedCrafting.csproj", "{D39920F7-71E4-4021-A6B6-E00594C02C75}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShedMonitor", "ShedMonitor\ShedMonitor.csproj", "{81C0C954-D4D6-4842-852C-719B592017C2}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5F7BE9D4-1533-436E-8ADA-14BC81764F99}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5F7BE9D4-1533-436E-8ADA-14BC81764F99}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5F7BE9D4-1533-436E-8ADA-14BC81764F99}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5F7BE9D4-1533-436E-8ADA-14BC81764F99}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D39920F7-71E4-4021-A6B6-E00594C02C75}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D39920F7-71E4-4021-A6B6-E00594C02C75}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D39920F7-71E4-4021-A6B6-E00594C02C75}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D39920F7-71E4-4021-A6B6-E00594C02C75}.Release|Any CPU.Build.0 = Release|Any CPU
+		{81C0C954-D4D6-4842-852C-719B592017C2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{81C0C954-D4D6-4842-852C-719B592017C2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{81C0C954-D4D6-4842-852C-719B592017C2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{81C0C954-D4D6-4842-852C-719B592017C2}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

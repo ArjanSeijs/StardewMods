@@ -1,5 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
+    
     <PropertyGroup>
         <TargetFramework>net6.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
@@ -8,18 +9,31 @@
         <EnableHarmony>true</EnableHarmony>
 
         <!-- Manifest fields -->
-        <Name>ShedCrafting</Name>
+        <Name>ShedMonitor</Name>
         <Authors>EternalSoap</Authors>
-        <Description>Adds Chest Inside Building To Crafting Station</Description>
-        <UniqueID>EternalSoap.ShedCrafting</UniqueID>
+        <Description>View the Inventory of your Shed as a big Chest</Description>
+        <UniqueID>EternalSoap.ShedMonitor</UniqueID>
         <MinimumGameVersion>1.6</MinimumGameVersion>
         <MinimumApiVersion>4.5.2</MinimumApiVersion>
         <UpdateKeys>Nexus:12345</UpdateKeys>
+        <RootNamespace>ShedMonitor</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>
         <PackageReference Include="Leclair.Stardew.ModManifestBuilder" Version="2.4.1"/>
         <PackageReference Include="Pathoschild.Stardew.ModBuildConfig" Version="4.4.0"/>
+        <PackageReference Include="PropertyChanged.SourceGenerator" Version="1.1.2">
+          <PrivateAssets>all</PrivateAssets>
+          <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
     </ItemGroup>
+
+    <ItemGroup>
+        <Reference Include="StardewUI">
+            <HintPath>$(GameModsPath)\StardewUI\StardewUI.dll</HintPath>
+            <Private>false</Private>
+        </Reference>
+    </ItemGroup>
+
 
 </Project>

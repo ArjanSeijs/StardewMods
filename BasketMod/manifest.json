@@ -7,21 +7,14 @@
    | 
    */
   "$schema": "https://smapi.io/schemas/manifest.json",
-  "UniqueID": "EternalSoap.ShedCrafting",
-  "Name": "ShedCrafting",
+  "UniqueID": "EternalSoap.BasketMod",
+  "Name": "BasketMod",
   "Author": "EternalSoap",
   "Version": "1.0.0-Debug",
-  "Description": "Adds Chest Inside Building To Crafting Station",
+  "Description": "View the Inventory of your Shed as a big Chest",
   "MinimumApiVersion": "4.5.2",
   "MinimumGameVersion": "1.6",
-  "EntryDll": "ShedCrafting.dll",
-  "Dependencies": [
-    {
-      "UniqueID": "leclair.bettercrafting",
-      "MinimumVersion": "2.18.0",
-      "IsRequired": false
-    }
-  ],
+  "EntryDll": "BasketMod.dll",
   "UpdateKeys": [
     "Nexus:12345"
   ]

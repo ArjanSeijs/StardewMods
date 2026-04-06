@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics.CodeAnalysis;
+using HarmonyLib;
 using Microsoft.Xna.Framework;
 using StardewModdingAPI;
 using StardewModdingAPI.Events;
@@ -43,8 +44,33 @@ public static class ShedCrafting
         return from chest in GetChests(tileLocation, location) select chest.Items;
     }
 
-    public class WorkbenchListener
+    /// <summary>
+    /// If this is a crafting page from a workbench
+    /// </summary>
+    /// <param name="e"></param>
+    public static void OnMenuChanged(MenuChangedEventArgs e)
     {
+        if (e.NewMenu is CraftingPage page && _wbTracer is not null)
+        {
+            var inventories = GetInventories(_wbTracer.TileLocation, _wbTracer.Location);
+            page._materialContainers.AddRange(inventories);
+        }
+
+        _wbTracer = null;
+    }
+
+
+    // TODO: Think about shared lib
+    public static class Patches
+    {
+        internal static void Apply(Harmony harmony)
+        {
+            harmony.Patch(
+                original: AccessTools.Method(typeof(Workbench), nameof(Workbench.checkForAction)),
+                postfix: new HarmonyMethod(typeof(Patches), nameof(CheckForAction_PostFix))
+            );
+        }
+
         /// <summary>
         /// On Workbench Action, set Current to 
         /// </summary>
@@ -68,19 +94,5 @@ public static class ShedCrafting
                 ModEntry.Mod.Monitor.Log($"Failed in {nameof(CheckForAction_PostFix)}:\n{ex}", LogLevel.Error);
             }
         }
-    }
-
-    /// <summary>
-    /// If this is a crafting page from a workbench
-    /// </summary>
-    /// <param name="e"></param>
-    public static void OnMenuChanged(MenuChangedEventArgs e)
-    {
-        if (e.NewMenu is CraftingPage page && _wbTracer is not null)
-        {
-            var inventories = GetInventories(_wbTracer.TileLocation, _wbTracer.Location);
-            page._materialContainers.AddRange(inventories);
-        }
-        _wbTracer = null;
     }
 }
