@@ -18,7 +18,7 @@
   "Dependencies": [
     {
       "UniqueID": "focustense.StardewUI",
-      "MinimumVersion": "0.6.1"
+      "MinimumVersion": "0.6.3"
     }
   ],
   "UpdateKeys": [

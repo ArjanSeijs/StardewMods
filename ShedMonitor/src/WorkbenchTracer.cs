@@ -57,11 +57,11 @@ public class WorkbenchTracer
             var menu = ModEntry.Mod.ViewEngine.CreateMenuFromAsset(
                 $"Mods/{ModEntry.Mod.ModManifest.Name}/Views/StorageViewSmall",
                 ChestListModel.CreateFromLocation(Game1.currentLocation));
-            
-            ModEntry.Mod.Monitor.Log($"Menus: {Game1.onScreenMenus.Count}",LogLevel.Debug);
+
+            ModEntry.Mod.Monitor.Log($"Menus: {Game1.onScreenMenus.Count}", LogLevel.Debug);
             foreach (var clickableMenu in Game1.onScreenMenus)
             {
-                ModEntry.Mod.Monitor.Log($"{clickableMenu}",LogLevel.Debug);
+                ModEntry.Mod.Monitor.Log($"{clickableMenu}", LogLevel.Debug);
             }
         }
 

@@ -425,6 +425,7 @@ internal static class ViewEngineExtensions
         {
             return null;
         }
+
         for (var dir = Directory.GetParent(sourceFilePath); dir is not null; dir = dir.Parent)
         {
             if (dir.EnumerateFiles("*.csproj").Any())
@@ -432,6 +433,7 @@ internal static class ViewEngineExtensions
                 return dir.FullName;
             }
         }
+
         return null;
     }
 }

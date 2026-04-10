@@ -20,5 +20,11 @@
         <PackageReference Include="Leclair.Stardew.ModManifestBuilder" Version="2.4.1"/>
         <PackageReference Include="Pathoschild.Stardew.ModBuildConfig" Version="4.4.0"/>
     </ItemGroup>
-
+    
+    <ItemGroup>
+        <Reference Include="StardewUI">
+            <HintPath>$(GameModsPath)\SpaceCore\SpaceCore.dll</HintPath>
+            <Private>false</Private>
+        </Reference>
+    </ItemGroup>
 </Project>

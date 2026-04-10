@@ -9,14 +9,15 @@ using StardewValley;
 namespace ShedMonitor.apis
 {
     /// <summary>The API which lets other mods add a config UI through Generic Mod Config Menu.</summary>
-    public interface IGenericModConfigMenuApi // Obsolete methods can be found in Framework/IGenericModConfigMenuApiWithObsoleteMethods
+    public interface
+        IGenericModConfigMenuApi // Obsolete methods can be found in Framework/IGenericModConfigMenuApiWithObsoleteMethods
     {
         /*********
-        ** Methods
-        *********/
+         ** Methods
+         *********/
         /****
-        ** Must be called first
-        ****/
+         ** Must be called first
+         ****/
         /// <summary>Register a mod whose config can be edited through the UI.</summary>
         /// <param name="mod">The mod's manifest.</param>
         /// <param name="reset">Reset the mod's config to its default values.</param>
@@ -27,8 +28,8 @@ namespace ShedMonitor.apis
 
 
         /****
-        ** Basic options
-        ****/
+         ** Basic options
+         ****/
         /// <summary>Add a section title at the current position in the form.</summary>
         /// <param name="mod">The mod's manifest.</param>
         /// <param name="text">The title text shown in the form.</param>
@@ -51,7 +52,8 @@ namespace ShedMonitor.apis
         /// <param name="texture">The image texture to display.</param>
         /// <param name="texturePixelArea">The pixel area within the texture to display, or <c>null</c> to show the entire image.</param>
         /// <param name="scale">The zoom factor to apply to the image.</param>
-        void AddImage(IManifest mod, Func<Texture2D> texture, Rectangle? texturePixelArea = null, int scale = Game1.pixelZoom);
+        void AddImage(IManifest mod, Func<Texture2D> texture, Rectangle? texturePixelArea = null,
+            int scale = Game1.pixelZoom);
 
         /// <summary>Add a boolean option at the current position in the form.</summary>
         /// <param name="mod">The mod's manifest.</param>
@@ -60,7 +62,8 @@ namespace ShedMonitor.apis
         /// <param name="name">The label text to show in the form.</param>
         /// <param name="tooltip">The tooltip text shown when the cursor hovers on the field, or <c>null</c> to disable the tooltip.</param>
         /// <param name="fieldId">The unique field ID for use with <see cref="OnFieldChanged"/>, or <c>null</c> to auto-generate a randomized ID.</param>
-        void AddBoolOption(IManifest mod, Func<bool> getValue, Action<bool> setValue, Func<string> name, Func<string> tooltip = null, string fieldId = null);
+        void AddBoolOption(IManifest mod, Func<bool> getValue, Action<bool> setValue, Func<string> name,
+            Func<string> tooltip = null, string fieldId = null);
 
         /// <summary>Add an integer option at the current position in the form.</summary>
         /// <param name="mod">The mod's manifest.</param>
@@ -73,7 +76,9 @@ namespace ShedMonitor.apis
         /// <param name="interval">The interval of values that can be selected.</param>
         /// <param name="formatValue">Get the display text to show for a value, or <c>null</c> to show the number as-is.</param>
         /// <param name="fieldId">The unique field ID for use with <see cref="OnFieldChanged"/>, or <c>null</c> to auto-generate a randomized ID.</param>
-        void AddNumberOption(IManifest mod, Func<int> getValue, Action<int> setValue, Func<string> name, Func<string> tooltip = null, int? min = null, int? max = null, int? interval = null, Func<int, string> formatValue = null, string fieldId = null);
+        void AddNumberOption(IManifest mod, Func<int> getValue, Action<int> setValue, Func<string> name,
+            Func<string> tooltip = null, int? min = null, int? max = null, int? interval = null,
+            Func<int, string> formatValue = null, string fieldId = null);
 
         /// <summary>Add a float option at the current position in the form.</summary>
         /// <param name="mod">The mod's manifest.</param>
@@ -86,7 +91,9 @@ namespace ShedMonitor.apis
         /// <param name="interval">The interval of values that can be selected.</param>
         /// <param name="formatValue">Get the display text to show for a value, or <c>null</c> to show the number as-is.</param>
         /// <param name="fieldId">The unique field ID for use with <see cref="OnFieldChanged"/>, or <c>null</c> to auto-generate a randomized ID.</param>
-        void AddNumberOption(IManifest mod, Func<float> getValue, Action<float> setValue, Func<string> name, Func<string> tooltip = null, float? min = null, float? max = null, float? interval = null, Func<float, string> formatValue = null, string fieldId = null);
+        void AddNumberOption(IManifest mod, Func<float> getValue, Action<float> setValue, Func<string> name,
+            Func<string> tooltip = null, float? min = null, float? max = null, float? interval = null,
+            Func<float, string> formatValue = null, string fieldId = null);
 
         /// <summary>Add a string option at the current position in the form.</summary>
         /// <param name="mod">The mod's manifest.</param>
@@ -97,7 +104,9 @@ namespace ShedMonitor.apis
         /// <param name="allowedValues">The values that can be selected, or <c>null</c> to allow any.</param>
         /// <param name="formatAllowedValue">Get the display text to show for a value from <paramref name="allowedValues"/>, or <c>null</c> to show the values as-is.</param>
         /// <param name="fieldId">The unique field ID for use with <see cref="OnFieldChanged"/>, or <c>null</c> to auto-generate a randomized ID.</param>
-        void AddTextOption(IManifest mod, Func<string> getValue, Action<string> setValue, Func<string> name, Func<string> tooltip = null, string[] allowedValues = null, Func<string, string> formatAllowedValue = null, string fieldId = null);
+        void AddTextOption(IManifest mod, Func<string> getValue, Action<string> setValue, Func<string> name,
+            Func<string> tooltip = null, string[] allowedValues = null, Func<string, string> formatAllowedValue = null,
+            string fieldId = null);
 
         /// <summary>Add a keybind at the current position in the form.</summary>
         /// <param name="mod">The mod's manifest.</param>
@@ -106,7 +115,8 @@ namespace ShedMonitor.apis
         /// <param name="name">The label text to show in the form.</param>
         /// <param name="tooltip">The tooltip text shown when the cursor hovers on the field, or <c>null</c> to disable the tooltip.</param>
         /// <param name="fieldId">The unique field ID for use with <see cref="OnFieldChanged"/>, or <c>null</c> to auto-generate a randomized ID.</param>
-        void AddKeybind(IManifest mod, Func<SButton> getValue, Action<SButton> setValue, Func<string> name, Func<string> tooltip = null, string fieldId = null);
+        void AddKeybind(IManifest mod, Func<SButton> getValue, Action<SButton> setValue, Func<string> name,
+            Func<string> tooltip = null, string fieldId = null);
 
         /// <summary>Add a keybind list at the current position in the form.</summary>
         /// <param name="mod">The mod's manifest.</param>
@@ -115,12 +125,13 @@ namespace ShedMonitor.apis
         /// <param name="name">The label text to show in the form.</param>
         /// <param name="tooltip">The tooltip text shown when the cursor hovers on the field, or <c>null</c> to disable the tooltip.</param>
         /// <param name="fieldId">The unique field ID for use with <see cref="OnFieldChanged"/>, or <c>null</c> to auto-generate a randomized ID.</param>
-        void AddKeybindList(IManifest mod, Func<KeybindList> getValue, Action<KeybindList> setValue, Func<string> name, Func<string> tooltip = null, string fieldId = null);
+        void AddKeybindList(IManifest mod, Func<KeybindList> getValue, Action<KeybindList> setValue, Func<string> name,
+            Func<string> tooltip = null, string fieldId = null);
 
 
         /****
-        ** Multi-page management
-        ****/
+         ** Multi-page management
+         ****/
         /// <summary>Start a new page in the mod's config UI, or switch to that page if it already exists. All options registered after this will be part of that page.</summary>
         /// <param name="mod">The mod's manifest.</param>
         /// <param name="pageId">The unique page ID.</param>
@@ -137,8 +148,8 @@ namespace ShedMonitor.apis
 
 
         /****
-        ** Advanced
-        ****/
+         ** Advanced
+         ****/
 
         /// <summary>Set whether the options registered after this point can only be edited from the title screen.</summary>
         /// <param name="mod">The mod's manifest.</param>

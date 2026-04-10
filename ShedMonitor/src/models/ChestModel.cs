@@ -25,6 +25,7 @@ public record ChestModel(Chest Chest)
         ItemSpriteModel.Create(Util.GetSignItemNearChest(Chest) ?? Chest.Items.FirstOrDefault());
 
     #region Methods
+
     /// <summary>
     /// 
     /// </summary>
