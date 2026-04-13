@@ -19,8 +19,8 @@ public static class BasketToolPatch
         try
         {
             if (!__instance.AsBasket(out var basket)) return true;
-
-            var inv = BasketInventory.Create(basket.Value);
+            
+            var inv = new BasketInventory(basket.Value);
             inv.ShowMenu();
             Game1.playSound("tinyWhip");
             return false;

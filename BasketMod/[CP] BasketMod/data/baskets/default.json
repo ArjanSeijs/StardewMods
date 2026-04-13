@@ -22,7 +22,7 @@
             "{{ModId}}.BasketType": "Default",
             "{{ModId}}.SlotCapacity": "{{DefaultSlotCapacity}}",
             "{{ModId}}.ItemCapacity": "{{DefaultItemCapacity}}",
-            "{{ModId}}.SlotItemCapacity": "{{DefaultStackSize}}",
+            "{{ModId}}.StackCapacity": "{{DefaultStackSize}}",
           }
         }
       }

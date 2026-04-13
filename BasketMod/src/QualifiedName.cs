@@ -20,16 +20,8 @@ public static class QualifiedName
         public const string SlotCapacity = "EternalSoap.BasketMod.CP.SlotCapacity";
         public const string ItemCapacity = "EternalSoap.BasketMod.CP.ItemCapacity";
         public const string StackCapacity = "EternalSoap.BasketMod.CP.StackCapacity";
-        public const string ContextTags = "EternalSoap.BasketMod.CP.ContextTags";
+        public const string ContextTagsQuery = "EternalSoap.BasketMod.CP.ContextTagsQuery";
         public const string Inception = "EternalSoap.BasketMod.CP.Inception";   
-    }
-
-    public static class Highlight
-    {
-        public const string Forage = "Forage";
-        public const string Gem = "Gem";
-        public const string Bait = "Bait";
-        public const string Tackle = "EternalSoap.BasketMod.CP.HighlightTackle";
     }
 
     public static string InventoryName(string basketId)

@@ -9,42 +9,27 @@ namespace BasketMod.basket;
 
 public class BasketInventory : IInventory
 {
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="basket"></param>
-    /// <returns></returns>
-    public static BasketInventory Create(BasketData basket)
-    {
-        var inv = new BasketInventory(
-            QualifiedName.InventoryName(basket.InventoryId),
-            basket.Source,
-            basket.SlotCapacity,
-            basket.ItemCapacity,
-            basket.StackCapacity);
-        //ItemHighlighters.GetHighlighterFromContext(basket)
-        return inv;
-    }
+    public BasketData BasketData { get; set; }
 
     /// <summary>
     /// The Basket Item
     /// </summary>
-    public Item Source { get; }
+    public Item? Source => BasketData.Source;
 
     /// <summary>
     /// The amount of slots (item stacks)
     /// </summary>
-    public int SlotCapacity { get; }
+    public int SlotCapacity => BasketData.SlotCapacity;
 
     /// <summary>
     /// Max amount of total items
     /// </summary>
-    public int ItemCapacity { get; }
+    public int ItemCapacity => BasketData.ItemCapacity;
 
     /// <summary>
     /// Max Amount of items in one slot
     /// </summary>
-    public int StackCapacity { get; }
+    public int StackCapacity => BasketData.StackCapacity;
 
     /// <summary>
     /// Global Inventory for this basket
@@ -54,13 +39,13 @@ public class BasketInventory : IInventory
     /// <summary>
     /// The Global Inventory ID Including prefix
     /// </summary>
-    public string GlobalInventoryID { get; }
+    public string GlobalInventoryID => QualifiedName.InventoryName(BasketData.InventoryId);
 
     /// <summary>
     /// The Sum of all items in the inventory
     /// </summary>
 
-    public int ItemCount => Inventory.Sum(item => item.stack.Value);
+    public int ItemCount => Inventory.Sum(item => item.Stack);
 
     /// <summary>
     /// <see cref="ItemCapacity"/> - <see cref="ItemCount"/>
@@ -68,28 +53,12 @@ public class BasketInventory : IInventory
     public int ItemRemainingCapacity => Math.Max(0, ItemCapacity - ItemCount);
 
     /// <summary>
-    /// Function for handling allowed items in inventory.
-    /// </summary>
-    private Func<Item, bool>? HighlightFunction { get; }
-
-    /// <summary>
     /// 
     /// </summary>
-    /// <param name="globalInventoryId"></param>
-    /// <param name="source"></param>
-    /// <param name="slotCapacity"></param>
-    /// <param name="itemCapacity"></param>
-    /// <param name="stackCapacity"></param>
-    /// <param name="function"></param>
-    public BasketInventory(string globalInventoryId, Item source, int slotCapacity = 9, int itemCapacity = int.MaxValue,
-        int stackCapacity = 999, Func<Item, bool>? function = null)
+    /// <param name="basketData"></param>
+    public BasketInventory(BasketData basketData)
     {
-        GlobalInventoryID = globalInventoryId;
-        Source = source;
-        SlotCapacity = Math.Clamp(slotCapacity, 2, 12 * 3);
-        ItemCapacity = itemCapacity;
-        StackCapacity = stackCapacity;
-        HighlightFunction = function;
+        BasketData = basketData;
     }
 
 
@@ -198,7 +167,8 @@ public class BasketInventory : IInventory
         if (Inventory.Count >= SlotCapacity) return false; // Only if empty slot left
         if (ItemCount >= ItemCapacity) return false; // Only if there is Space Left
         if (item.AsBasket(out _)) return false; // TODO Inception
-        return HighlightFunction == null || HighlightFunction(item); // Custom Logic for basket
+        if (BasketData.ContextTagsQuery.Equals("")) return true; // No query so include all
+        return ItemContextTagManager.DoesTagQueryMatch(BasketData.ContextTagsQuery, item.GetContextTags());
     }
 
     /// <summary>
@@ -218,6 +188,7 @@ public class BasketInventory : IInventory
         Game1.activeClickableMenu = InventoryMenu();
     }
 
+    
 
     #region Delegate
 

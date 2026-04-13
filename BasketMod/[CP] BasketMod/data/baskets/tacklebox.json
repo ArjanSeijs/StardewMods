@@ -19,10 +19,10 @@
             "IsEfficient": true
           },
           "ModData": {
-            "{{ModId}}.BasketType": "BasketTackle",
+            "{{ModId}}.BasketType": "Tackle",
             "{{ModId}}.SlotCapacity": 15,
-            "{{ModId}}.ContextTags": ""
-          }
+            "{{ModId}}.ContextTagsQuery": "category_bait"
+          },
         }
       }
     },

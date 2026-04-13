@@ -43,11 +43,7 @@ public class ModEntry : Mod
         var basketId = args.Length > 0 ? args[0] : "Global";
         var slotCapacity = args.Length > 1 ? int.Parse(args[1]) : 36;
         var itemCapacity = args.Length > 2 ? int.Parse(args[2]) : int.MaxValue;
-        var inventory = new BasketInventory(
-            QualifiedName.InventoryName(basketId),
-            null!,
-            slotCapacity,
-            itemCapacity);
+        var inventory = new BasketInventory(new BasketData(basketId, slotCapacity, itemCapacity));
         inventory.ShowMenu();
     }
     

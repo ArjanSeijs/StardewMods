@@ -94,48 +94,4 @@ public static class Extensions
     {
         return int.TryParse(str, out var v) ? v : null;
     }
-
-    /// <summary>
-    /// <see cref="Netcode.NetDictionary.TryGetValue"/>
-    /// </summary>
-    /// <param name="dictionary"></param>
-    /// <param name="key"></param>
-    /// <param name="defaultValue"></param>
-    /// <typeparam name="TKey"></typeparam>
-    /// <typeparam name="TValue"></typeparam>
-    /// <typeparam name="TField"></typeparam>
-    /// <typeparam name="TSerialDict"></typeparam>
-    /// <typeparam name="TSelf"></typeparam>
-    /// <returns></returns>
-    public static TValue TryGetValue<TKey, TValue, TField, TSerialDict, TSelf>(
-        this NetDictionary<TKey, TValue, TField, TSerialDict, TSelf> dictionary, TKey key, TValue defaultValue)
-        where TField : class, INetObject<INetSerializable>, new()
-        where TSerialDict : IDictionary<TKey, TValue>, new()
-        where TSelf : NetDictionary<TKey, TValue, TField, TSerialDict, TSelf>
-    {
-        return dictionary.TryGetValue(key, out var returnValue) ? returnValue : defaultValue;
-    }
-
-    /// <summary>
-    /// <see cref="Netcode.NetDictionary.TryGetValue"/>
-    /// </summary>
-    /// <param name="dictionary"></param>
-    /// <param name="key"></param>
-    /// <typeparam name="TKey"></typeparam>
-    /// <typeparam name="TValue"></typeparam>
-    /// <typeparam name="TField"></typeparam>
-    /// <typeparam name="TSerialDict"></typeparam>
-    /// <typeparam name="TSelf"></typeparam>
-    /// <returns></returns>
-    public static TValue? TryGetValue<TKey, TValue, TField, TSerialDict, TSelf>(
-        this NetDictionary<TKey, TValue, TField, TSerialDict, TSelf> dictionary, TKey key)
-        where TField : class, INetObject<INetSerializable>, new()
-        where TSerialDict : IDictionary<TKey, TValue>, new()
-        where TSelf : NetDictionary<TKey, TValue, TField, TSerialDict, TSelf>
-        where TValue : class?
-    {
-        return dictionary.TryGetValue(key, out var returnValue) ? returnValue : null;
-    }
-
-    
 }
