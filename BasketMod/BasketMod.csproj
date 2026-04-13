@@ -5,11 +5,12 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
         <LangVersion>10</LangVersion>
+        <EnableHarmony>true</EnableHarmony>
 
         <!-- Manifest fields -->
         <Name>BasketMod</Name>
         <Authors>EternalSoap</Authors>
-        <Description>View the Inventory of your Shed as a big Chest</Description>
+        <Description>Adds usable baskets to the game</Description>
         <UniqueID>EternalSoap.BasketMod</UniqueID>
         <MinimumGameVersion>1.6</MinimumGameVersion>
         <MinimumApiVersion>4.5.2</MinimumApiVersion>
@@ -20,11 +21,8 @@
         <PackageReference Include="Leclair.Stardew.ModManifestBuilder" Version="2.4.1"/>
         <PackageReference Include="Pathoschild.Stardew.ModBuildConfig" Version="4.4.0"/>
     </ItemGroup>
-    
+
     <ItemGroup>
-        <Reference Include="StardewUI">
-            <HintPath>$(GameModsPath)\SpaceCore\SpaceCore.dll</HintPath>
-            <Private>false</Private>
-        </Reference>
+        <ContentPacks Include="[CP] $(name)" Version="$(Version)" />
     </ItemGroup>
 </Project>

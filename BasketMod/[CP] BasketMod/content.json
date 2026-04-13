@@ -1,0 +1,28 @@
+{
+  "Format": "2.8.0",
+  "ConfigSchema": {
+    "DefaultSlotCapacity": {
+      "AllowValues": "2, 3, 4, 5, 6, 7, 8, 9, 12, 15, 18, 32",
+      "Default": "9"
+    },
+    "DefaultItemCapacity": {
+      "AllowValues": "1, 2, 4, 15, 25, 50, 100, 35000",
+      "Default": "50"
+    },
+    "DefaultStackSize": {
+      "AllowValues": "1, 2, 4, 16, 32, 64, 999",
+      "Default": "4"
+    }
+  },
+  "Changes": [
+    {
+      "Action": "Include",
+      "FromFile": "data/baskets.json"
+    },
+    {
+      "Action": "Load",
+      "Target": "Mods/{{ModId}}/Tools",
+      "FromFile": "assets/basket.png"
+    }
+  ]
+}

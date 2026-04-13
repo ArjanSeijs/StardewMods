@@ -1,0 +1,8 @@
+{
+  "Changes": [
+    {
+      "Action": "Include",
+      "FromFile": "data/baskets/default.json, data/baskets/tacklebox.json"
+    }
+  ]
+}

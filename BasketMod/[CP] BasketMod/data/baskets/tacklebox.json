@@ -1,0 +1,30 @@
+{
+  "Changes": [
+    {
+      "Action": "EditData",
+      "Target": "Data/Tools",
+      "Entries": {
+        "{{ModId}}.BasketTackle": {
+          "Name": "{{ModId}}.BasketTackle",
+          "ClassName": "GenericTool",
+          "DisplayName": "Bucket of bait",
+          "Description": "A bucket full of bait.",
+          "Type": "Baskets",
+          "Category": -99,
+          "Price": 1200,
+          "Texture": "Mods/{{ModId}}/Tools",
+          "SpriteIndex": 1,
+          "SetProperties": {
+            "InstantUse": true,
+            "IsEfficient": true
+          },
+          "ModData": {
+            "{{ModId}}.BasketType": "BasketTackle",
+            "{{ModId}}.SlotCapacity": 15,
+            "{{ModId}}.ContextTags": ""
+          }
+        }
+      }
+    },
+  ]
+}

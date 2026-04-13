@@ -11,14 +11,19 @@
   "Name": "BasketMod",
   "Author": "EternalSoap",
   "Version": "1.0.0-Debug",
-  "Description": "View the Inventory of your Shed as a big Chest",
+  "Description": "Adds usable baskets to the game",
   "MinimumApiVersion": "4.5.2",
   "MinimumGameVersion": "1.6",
   "EntryDll": "BasketMod.dll",
   "Dependencies": [
     {
-      "UniqueID": "spacechase0.SpaceCore",
-      "MinimumVersion": "1.28.4"
+      "UniqueID": "EternalSoap.BasketMod.CP",
+      "MinimumVersion": "1.0.0"
+    },
+    {
+      "UniqueID": "Pathoschild.ContentPatcher",
+      "MinimumVersion": "2.9.1",
+      "IsRequired": false
     }
   ],
   "UpdateKeys": [

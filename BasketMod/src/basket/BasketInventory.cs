@@ -3,30 +3,95 @@ using StardewModdingAPI;
 using StardewValley;
 using StardewValley.Inventories;
 using StardewValley.Menus;
+using StardewValley.Tools;
 
-namespace BasketMod;
+namespace BasketMod.basket;
 
 public class BasketInventory : IInventory
 {
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="basket"></param>
+    /// <returns></returns>
+    public static BasketInventory Create(BasketData basket)
+    {
+        var inv = new BasketInventory(
+            QualifiedName.InventoryName(basket.InventoryId),
+            basket.Source,
+            basket.SlotCapacity,
+            basket.ItemCapacity,
+            basket.StackCapacity);
+        //ItemHighlighters.GetHighlighterFromContext(basket)
+        return inv;
+    }
+
+    /// <summary>
+    /// The Basket Item
+    /// </summary>
     public Item Source { get; }
+
+    /// <summary>
+    /// The amount of slots (item stacks)
+    /// </summary>
     public int SlotCapacity { get; }
+
+    /// <summary>
+    /// Max amount of total items
+    /// </summary>
     public int ItemCapacity { get; }
 
+    /// <summary>
+    /// Max Amount of items in one slot
+    /// </summary>
+    public int StackCapacity { get; }
+
+    /// <summary>
+    /// Global Inventory for this basket
+    /// </summary>
     public IInventory Inventory => Game1.player.team.GetOrCreateGlobalInventory(GlobalInventoryID);
 
+    /// <summary>
+    /// The Global Inventory ID Including prefix
+    /// </summary>
     public string GlobalInventoryID { get; }
+
+    /// <summary>
+    /// The Sum of all items in the inventory
+    /// </summary>
 
     public int ItemCount => Inventory.Sum(item => item.stack.Value);
 
-    public int SpaceLeft => Math.Max(0, ItemCapacity - ItemCount);
+    /// <summary>
+    /// <see cref="ItemCapacity"/> - <see cref="ItemCount"/>
+    /// </summary>
+    public int ItemRemainingCapacity => Math.Max(0, ItemCapacity - ItemCount);
 
-    public BasketInventory(string globalInventoryId, Item source, int slotCapacity = 9, int itemCapacity = int.MaxValue)
+    /// <summary>
+    /// Function for handling allowed items in inventory.
+    /// </summary>
+    private Func<Item, bool>? HighlightFunction { get; }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="globalInventoryId"></param>
+    /// <param name="source"></param>
+    /// <param name="slotCapacity"></param>
+    /// <param name="itemCapacity"></param>
+    /// <param name="stackCapacity"></param>
+    /// <param name="function"></param>
+    public BasketInventory(string globalInventoryId, Item source, int slotCapacity = 9, int itemCapacity = int.MaxValue,
+        int stackCapacity = 999, Func<Item, bool>? function = null)
     {
         GlobalInventoryID = globalInventoryId;
         Source = source;
         SlotCapacity = Math.Clamp(slotCapacity, 2, 12 * 3);
         ItemCapacity = itemCapacity;
+        StackCapacity = stackCapacity;
+        HighlightFunction = function;
     }
+
 
     /// <summary>
     /// <see cref="StardewValley.Objects.Chest.grabItemFromChest"/>
@@ -49,7 +114,6 @@ public class BasketInventory : IInventory
     /// <param name="who"></param>
     public virtual void GrabItemFromInventory(Item item, Farmer who)
     {
-        ModEntry.Mod.Monitor.Log($"Grabbing {item.QualifiedItemId} : {item.Stack}", LogLevel.Debug);
         if (item.Stack == 0)
             item.Stack = 1;
         var obj = this.AddItem(item);
@@ -67,90 +131,91 @@ public class BasketInventory : IInventory
             return;
         Game1.activeClickableMenu.currentlySnappedComponent = Game1.activeClickableMenu.getComponentWithID(id);
         Game1.activeClickableMenu.snapCursorToCurrentSnappedComponent();
-        ModEntry.Mod.Monitor.Log($"Spaceleft {SpaceLeft} of {ItemCapacity} [{ItemCount}]", LogLevel.Debug);
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="item"></param>
+    /// <returns></returns>
     public virtual Item? AddItem(Item item)
     {
-        if (item.Stack <= SpaceLeft)
+        // In case something goes wrong
+        ModEntry.Mod.RecoverInventory.RemoveEmptySlots();
+        ModEntry.Mod.RecoverInventory.Insert(0, item);
+        // Original Logic
+        if (item.Stack <= ItemRemainingCapacity)
         {
             return AddItemHelper(item);
         }
 
-        var (itemToAdd, diff) = item.GetMaxAmount(SpaceLeft);
-        var leftOverItem = AddItemHelper(itemToAdd);
-        var amountLeftOver = leftOverItem?.Stack ?? 0 + diff;
-        return item.GetAmount(amountLeftOver);
+        //Modified Loigc
+        var (itemToAdd, rest1) = item.GetSplit(ItemRemainingCapacity);
+        var rest2 = AddItemHelper(itemToAdd);
+        return rest1.Add(rest2);
     }
 
     /// <summary>
-    /// Original addItem method of chest
+    /// Modified AddItem Method from 
     /// <see cref="StardewValley.Objects.Chest.addItem"/>
     /// </summary>
     /// <param name="item"></param>
     /// <returns></returns>
     protected virtual Item? AddItemHelper(Item item)
     {
+        if (item.Stack > ItemRemainingCapacity)
+            ModEntry.Mod.Monitor.Log(
+                $"Item {item.QualifiedItemId} has size {item.Stack} while the remaining capacity is {ItemRemainingCapacity}",
+                LogLevel.Error);
+        // Altered Logic from Chest AddItem
         item.resetState();
         Inventory.RemoveEmptySlots();
         foreach (var invItem in Inventory)
         {
             if (invItem == null || !invItem.canStackWith(item)) continue;
-            var amount = item.Stack - invItem.addToStack(item);
+            var amount = item.Stack - invItem.AddToStack(item, StackCapacity);
             if (item.ConsumeStack(amount) == null)
                 return null;
         }
 
         if (Inventory.Count >= SlotCapacity)
             return item;
-        Inventory.Add(item);
-        return null;
+        var itemResized = item.GetAmount(Math.Min(item.Stack, StackCapacity));
+        Inventory.Add(itemResized);
+        return item.ConsumeStack(itemResized.Stack);
     }
 
 
-    public bool HighlightItems(Item i)
+    /// <summary>
+    /// If Item can be added to the inventory.
+    /// </summary>
+    /// <param name="item"></param>
+    /// <returns></returns>
+    public bool HighlightItems(Item item)
     {
-        // if is basket return false;
-        if (Inventory.Contains(i)) return true;
-        if (Inventory.Count >= SlotCapacity) return false;
-        return ItemCount < ItemCapacity;
+        if (Source == item) return false; // Cannot put self in self
+        if (Inventory.Contains(item)) return true; // Can take all items out
+        if (Inventory.Count >= SlotCapacity) return false; // Only if empty slot left
+        if (ItemCount >= ItemCapacity) return false; // Only if there is Space Left
+        if (item.AsBasket(out _)) return false; // TODO Inception
+        return HighlightFunction == null || HighlightFunction(item); // Custom Logic for basket
     }
 
-    /*
-    public ItemGrabMenu GetItemGrabMenu()
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <returns></returns>
+    public BasketInventoryMenu InventoryMenu()
     {
-        var cols = SlotCapacity < 9 ? SlotCapacity : (SlotCapacity - 1) / 3 + 1;
-        var rows = SlotCapacity < 9 ? 1 : 3;
-        ModEntry.Mod.Monitor.Log($"{SlotCapacity} -> [{rows},{cols}] = {rows * cols}", LogLevel.Debug);
-        // Menu Magic
-        var menu = new ItemGrabMenu(
-            this,
-            false,
-            true,
-            HighlightItems,
-            GrabItemFromInventory,
-            null,
-            GrabItemFromChest,
-            canBeExitedWithKey: true,
-            showOrganizeButton: true,
-            source: 1,
-            sourceItem: Source,
-            context: Source);
-        var width = 64 * cols + 8;
-        var xPosition = Game1.uiViewport.Width / 2 - (width + 32) / 2;
-        var yPosition = menu.ItemsToGrabMenu.yPositionOnScreen - (SlotCapacity < 9 ? 0 : 16);
-        menu.ItemsToGrabMenu = new InventoryMenu(xPosition, yPosition,
-            menu.ItemsToGrabMenu.playerInventory, menu.ItemsToGrabMenu.actualInventory,
-            menu.ItemsToGrabMenu.highlightMethod, cols * rows, rows);
-
-        menu.RepositionSideButtons();
-        return menu;
+        return BasketInventoryMenu.Create(this);
     }
-    */
-    
+
+    /// <summary>
+    /// 
+    /// </summary>
     public void ShowMenu()
     {
-        Game1.activeClickableMenu = BasketInventoryMenu.Create(this);
+        Game1.activeClickableMenu = InventoryMenu();
     }
 
 

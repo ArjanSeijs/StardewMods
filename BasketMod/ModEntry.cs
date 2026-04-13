@@ -1,8 +1,9 @@
-﻿using SpaceCore.Events;
+﻿using BasketMod.basket;
+using HarmonyLib;
 using StardewModdingAPI;
-using StardewModdingAPI.Events;
-using StardewValley.Delegates;
-using StardewValley.Triggers;
+using StardewValley;
+using StardewValley.Inventories;
+using StardewValley.Menus;
 
 namespace BasketMod;
 
@@ -10,27 +11,62 @@ public class ModEntry : Mod
 {
     public static ModEntry Mod { get; private set; } = null!;
 
+    /// <summary>
+    /// For debugging purposes
+    /// </summary>
+    public Inventory RecoverInventory { get; private set; } = null!;
+
     public override void Entry(IModHelper helper)
     {
-        Monitor.Log("BasketMod loaded (WIP)", LogLevel.Info);
         Mod = this;
-        TriggerActionManager.RegisterTrigger($"{ModManifest.UniqueID}_OnBasketUse");
-        TriggerActionManager.RegisterAction($"{ModManifest.UniqueID}_OnBasketUse", BasketUse);
-        helper.ConsoleCommands.Add("basket", "basket <slotCapacity> <itemCapacity>,", BasketCommand);
+        helper.ConsoleCommands.Add("basket_open", "basket_open <id> <slotCapacity?> <itemCapacity?>,", BasketCommand);
+        helper.ConsoleCommands.Add("basket_recover", "Menu that stores items in case something goes wrong",
+            BasketRecoverCommand);
+        helper.ConsoleCommands.Add("basket_list_inventories", "basket_list_inventories <all?> ", ListInventoriesCommand);
+        RecoverInventory = new Inventory();
+        Harmony();
     }
 
-    private void BasketCommand(string arg1, string[] arg2)
+    private void Harmony()
     {
-        var slotCapacity = int.Parse(arg2[0]);
-        var itemCapacity = arg2.Length > 1 ? int.Parse(arg2[1]) : int.MaxValue;
-        var inventory = new BasketInventory($"{ModManifest.UniqueID}_Basket", null, slotCapacity, itemCapacity);
+        var harmony = new Harmony(ModManifest.UniqueID);
+        BasketToolPatch.Apply(harmony);
+    }
+
+    private void BasketRecoverCommand(string command, string[] args)
+    {
+        Game1.activeClickableMenu = new ItemGrabMenu(RecoverInventory, RecoverInventory);
+    }
+
+    private static void BasketCommand(string command, string[] args)
+    {
+        var basketId = args.Length > 0 ? args[0] : "Global";
+        var slotCapacity = args.Length > 1 ? int.Parse(args[1]) : 36;
+        var itemCapacity = args.Length > 2 ? int.Parse(args[2]) : int.MaxValue;
+        var inventory = new BasketInventory(
+            QualifiedName.InventoryName(basketId),
+            null!,
+            slotCapacity,
+            itemCapacity);
         inventory.ShowMenu();
     }
-
-    private bool BasketUse(string[] args, TriggerActionContext context, out string error)
+    
+    private void ListInventoriesCommand(string command, string[] args)
     {
-        Monitor.Log("Basket Used!", LogLevel.Alert);
-        error = "Nothing to do";
-        return true;
+        foreach (var key in Game1.player.team.globalInventories.Keys)
+        {
+            if (key == null) continue;
+            if (key.StartsWith(QualifiedName.InventoryIDPrefix) || args.Length > 0 && (args[0].ToLower() == "all" || args[0].ToLower() == "true"))
+            {
+                Monitor.Log($"Inventory: {key}",LogLevel.Info);
+            }
+        }
+    }
+
+    public static void Debug(string? message)
+    {
+#if DEBUG
+        Mod.Monitor.Log(message ?? "<null>", LogLevel.Debug);
+#endif
     }
 }
