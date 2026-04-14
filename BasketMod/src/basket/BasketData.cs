@@ -19,6 +19,7 @@ public static class BasketDataExtension
             basketData = null;
             return false;
         }
+
         var data = basket.GetToolData().ModData;
         if (data is null || !data.TryGetValue(QualifiedName.Field.BasketType, out var type))
         {
@@ -55,14 +56,14 @@ public struct BasketData
         Source = item;
     }
 
-    public BasketData(string inventoryId, int itemCapacity = int.MaxValue, int slotCapacity = 9,
+    public BasketData(string inventoryId, int slotCapacity = 9, int itemCapacity = int.MaxValue,
         int stackCapacity = 999, string contextTagsQuery = "", Item? source = null)
     {
         Source = source;
         InventoryId = inventoryId;
         Type = "Basket";
-        ItemCapacity = itemCapacity;
         SlotCapacity = slotCapacity;
+        ItemCapacity = itemCapacity;
         StackCapacity = stackCapacity;
         ContextTagsQuery = contextTagsQuery;
     }
@@ -73,9 +74,9 @@ public struct BasketData
 
     public string Type { get; }
 
-    public int ItemCapacity { get; }
-
     public int SlotCapacity { get; }
+
+    public int ItemCapacity { get; }
 
     public int StackCapacity { get; }
 
