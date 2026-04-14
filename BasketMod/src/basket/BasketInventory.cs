@@ -3,13 +3,12 @@ using StardewModdingAPI;
 using StardewValley;
 using StardewValley.Inventories;
 using StardewValley.Menus;
-using StardewValley.Tools;
 
 namespace BasketMod.basket;
 
 public class BasketInventory : IInventory
 {
-    public BasketData BasketData { get; set; }
+    public BasketData BasketData { get; }
 
     /// <summary>
     /// The Basket Item
@@ -45,7 +44,7 @@ public class BasketInventory : IInventory
     /// The Sum of all items in the inventory
     /// </summary>
 
-    public int ItemCount => Inventory.Sum(item => item.Stack);
+    public int ItemCount => Inventory.Sum(item => item?.Stack ?? 0);
 
     /// <summary>
     /// <see cref="ItemCapacity"/> - <see cref="ItemCount"/>
@@ -168,14 +167,16 @@ public class BasketInventory : IInventory
         if (ItemCount >= ItemCapacity) return false; // Only if there is Space Left
         if (item.AsBasket(out _)) return false; // TODO Inception
         if (BasketData.ContextTagsQuery.Equals("")) return true; // No query so include all
-        return ItemContextTagManager.DoesTagQueryMatch(BasketData.ContextTagsQuery, item.GetContextTags());
+        var disjunctions = BasketData.ContextTagsQuery.Split("||");
+        var contextTags = item.GetContextTags();
+        return disjunctions.Any(query => ItemContextTagManager.DoesTagQueryMatch(query, contextTags));
     }
 
     /// <summary>
     /// 
     /// </summary>
     /// <returns></returns>
-    public BasketInventoryMenu InventoryMenu()
+    public ItemGrabMenu InventoryMenu()
     {
         return BasketInventoryMenu.Create(this);
     }
@@ -188,7 +189,6 @@ public class BasketInventory : IInventory
         Game1.activeClickableMenu = InventoryMenu();
     }
 
-    
 
     #region Delegate
 

@@ -9,7 +9,7 @@
           "ClassName": "GenericTool",
           "DisplayName": "Bucket of bait",
           "Description": "A bucket full of bait.",
-          "Type": "Baskets",
+          "Type": "Basket",
           "Category": -99,
           "Price": 1200,
           "Texture": "Mods/{{ModId}}/Tools",
@@ -21,7 +21,7 @@
           "ModData": {
             "{{ModId}}.BasketType": "Tackle",
             "{{ModId}}.SlotCapacity": 15,
-            "{{ModId}}.ContextTagsQuery": "category_bait"
+            "{{ModId}}.ContextTagsQuery": "category_bait || category_tackle"
           },
         }
       }
