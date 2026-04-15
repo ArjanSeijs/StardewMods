@@ -33,12 +33,12 @@ public class BasketInventory : IInventory
     /// <summary>
     /// Global Inventory for this basket
     /// </summary>
-    public IInventory Inventory => Game1.player.team.GetOrCreateGlobalInventory(GlobalInventoryID);
+    public IInventory Inventory => Game1.player.team.GetOrCreateGlobalInventory(GlobalInventoryId);
 
     /// <summary>
     /// The Global Inventory ID Including prefix
     /// </summary>
-    public string GlobalInventoryID => QualifiedName.InventoryName(BasketData.InventoryId);
+    public string GlobalInventoryId => BasketData.GlobalInventoryId;
 
     /// <summary>
     /// The Sum of all items in the inventory
@@ -117,7 +117,7 @@ public class BasketInventory : IInventory
             return AddItemHelper(item);
         }
 
-        //Modified Loigc
+        //Modified Logic
         var (itemToAdd, rest1) = item.GetSplit(ItemRemainingCapacity);
         var rest2 = AddItemHelper(itemToAdd);
         return rest1.Add(rest2);
@@ -165,7 +165,7 @@ public class BasketInventory : IInventory
         if (Inventory.Contains(item)) return true; // Can take all items out
         if (Inventory.Count >= SlotCapacity) return false; // Only if empty slot left
         if (ItemCount >= ItemCapacity) return false; // Only if there is Space Left
-        if (item.AsBasket(out _)) return false; // TODO Inception
+        if (item.AsBasket(out _)) return BasketData.Inception;
         if (BasketData.ContextTagsQuery.Equals("")) return true; // No query so include all
         var disjunctions = BasketData.ContextTagsQuery.Split("||");
         var contextTags = item.GetContextTags();

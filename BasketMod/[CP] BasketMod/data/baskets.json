@@ -2,7 +2,7 @@
   "Changes": [
     {
       "Action": "Include",
-      "FromFile": "data/baskets/default.json, data/baskets/tacklebox.json"
+      "FromFile": "data/baskets/default.json, data/baskets/tacklebox.json, data/baskets/inception.json, data/baskets/junimos.json"
     }
   ]
 }

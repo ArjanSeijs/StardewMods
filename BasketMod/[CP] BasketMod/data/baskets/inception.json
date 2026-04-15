@@ -1,0 +1,33 @@
+{
+  "Changes": [
+    {
+      "Action": "EditData",
+      "Target": "Data/Tools",
+      "Entries": {
+        "{{ModId}}.BasketInception": {
+          "Name": "{{ModId}}.BasketInception",
+          "ClassName": "GenericTool",
+          "DisplayName": "Basket Basket",
+          "Description": "A Basket for ... your Baskets.",
+          "CanBeLostOnDeath" : false,
+          "Type": "Basket",
+          "Category": -99,
+          "Price": 25000,
+          "Texture": "Mods/{{ModId}}/Tools",
+          "SpriteIndex": 3,
+          "SetProperties": {
+            "InstantUse": true,
+            "IsEfficient": true
+          },
+          "ModData": {
+            "{{ModId}}.BasketType": "Inception",
+            "{{ModId}}.SlotCapacity": "5",
+            "{{ModId}}.StackCapacity": "1",
+            "{{ModId}}.Inception": true,
+            "{{ModId}}.ContextTagsQuery": "dummy_no_items"
+          }
+        }
+      }
+    },
+  ]
+}

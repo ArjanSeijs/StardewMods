@@ -1,5 +1,3 @@
-using StardewValley;
-
 namespace BasketMod;
 
 public static class QualifiedName

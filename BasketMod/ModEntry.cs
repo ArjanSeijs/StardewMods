@@ -22,7 +22,8 @@ public class ModEntry : Mod
         helper.ConsoleCommands.Add("basket_open", "basket_open <id> <slotCapacity?> <itemCapacity?>,", BasketCommand);
         helper.ConsoleCommands.Add("basket_recover", "Menu that stores items in case something goes wrong",
             BasketRecoverCommand);
-        helper.ConsoleCommands.Add("basket_list_inventories", "basket_list_inventories <all?> ", ListInventoriesCommand);
+        helper.ConsoleCommands.Add("basket_list_inventories", "basket_list_inventories <all?> ",
+            ListInventoriesCommand);
         RecoverInventory = new Inventory();
         Harmony();
     }
@@ -43,19 +44,20 @@ public class ModEntry : Mod
         var basketId = args.Length > 0 ? args[0] : "Global";
         var slotCapacity = args.Length > 1 ? int.Parse(args[1]) : 36;
         var itemCapacity = args.Length > 2 ? int.Parse(args[2]) : int.MaxValue;
-        var stackCapacity =  args.Length > 3 ? int.Parse(args[3]) : int.MaxValue;
-        var inventory = new BasketInventory(new BasketData(basketId, slotCapacity, itemCapacity,  stackCapacity));
+        var stackCapacity = args.Length > 3 ? int.Parse(args[3]) : int.MaxValue;
+        var inventory = new BasketInventory(new BasketData(basketId, slotCapacity, itemCapacity, stackCapacity));
         inventory.ShowMenu();
     }
-    
+
     private void ListInventoriesCommand(string command, string[] args)
     {
         foreach (var key in Game1.player.team.globalInventories.Keys)
         {
             if (key == null) continue;
-            if (key.StartsWith(QualifiedName.InventoryIDPrefix) || args.Length > 0 && (args[0].ToLower() == "all" || args[0].ToLower() == "true"))
+            if (key.StartsWith(QualifiedName.InventoryIDPrefix) ||
+                args.Length > 0 && (args[0].ToLower() == "all" || args[0].ToLower() == "true"))
             {
-                Monitor.Log($"Inventory: {key}",LogLevel.Info);
+                Monitor.Log($"Inventory: {key}", LogLevel.Info);
             }
         }
     }

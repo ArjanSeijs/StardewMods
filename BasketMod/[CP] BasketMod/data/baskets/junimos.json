@@ -4,26 +4,27 @@
       "Action": "EditData",
       "Target": "Data/Tools",
       "Entries": {
-        "{{ModId}}.BasketTackle": {
-          "Name": "{{ModId}}.BasketTackle",
+        "{{ModId}}.BasketJunimos": {
+          "Name": "{{ModId}}.BasketJunimos",
           "ClassName": "GenericTool",
-          "DisplayName": "Bucket of bait",
-          "Description": "A bucket full of bait.",
+          "DisplayName": "Basket Basket",
+          "Description": "A Basket for ... your Baskets.",
           "CanBeLostOnDeath" : false,
           "Type": "Basket",
           "Category": -99,
-          "Price": 500,
+          "Price": 25000,
           "Texture": "Mods/{{ModId}}/Tools",
-          "SpriteIndex": 1,
+          "SpriteIndex": 4,
           "SetProperties": {
             "InstantUse": true,
             "IsEfficient": true
           },
           "ModData": {
-            "{{ModId}}.BasketType": "Tackle",
-            "{{ModId}}.SlotCapacity": 15,
-            "{{ModId}}.ContextTagsQuery": "category_bait || category_tackle"
-          },
+            "{{ModId}}.BasketType": "Junimos",
+            "{{ModId}}.BasketId": "JunimoChests",
+            "{{ModId}}.SlotCapacity": "9",
+            "{{ModId}}.Inception": true,
+          }
         }
       }
     },
