@@ -4,25 +4,26 @@
       "Action": "EditData",
       "Target": "Data/Tools",
       "Entries": {
-        "{{ModPrefix}}.BasketTackle": {
-          "Name": "{{ModPrefix}}.BasketTackle",
+        "{{ModPrefix}}.BasketMuseum": {
+          "Name": "{{ModPrefix}}.BasketMuseum",
           "ClassName": "GenericTool",
-          "DisplayName": "{{i18n:Tackle.Displayname}}",
-          "Description": "{{i18n:Tackle.Description}}",
+          "DisplayName": "{{i18n:Museum.Displayname}}",
+          "Description": "{{i18n:Museum.Description}}",
           "CanBeLostOnDeath" : false,
           "Type": "Basket",
           "Category": -99,
-          "Price": 500,
+          "Price": 1500,
           "Texture": "Mods/{{ModPrefix}}/Tools",
-          "SpriteIndex": 6,
+          "SpriteIndex": 5,
           "SetProperties": {
             "InstantUse": true,
             "IsEfficient": true
           },
           "ModData": {
-            "{{ModPrefix}}.BasketType": "Tackle",
+            "{{ModPrefix}}.BasketType": "Museum",
             "{{ModPrefix}}.SlotCapacity": 15,
-            "{{ModPrefix}}.ContextTagsQuery": "category_bait || category_tackle || item_bait_maker "
+            "{{ModPrefix}}.StackCapacity": 1,
+            "{{ModPrefix}}.ContextTagsQuery": "item_type_minerals || item_type_arch"
           },
         }
       }

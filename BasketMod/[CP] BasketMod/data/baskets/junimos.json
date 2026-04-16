@@ -4,26 +4,26 @@
       "Action": "EditData",
       "Target": "Data/Tools",
       "Entries": {
-        "{{ModId}}.BasketJunimos": {
-          "Name": "{{ModId}}.BasketJunimos",
+        "{{ModPrefix}}.BasketJunimos": {
+          "Name": "{{ModPrefix}}.BasketJunimos",
           "ClassName": "GenericTool",
-          "DisplayName": "Basket Basket",
-          "Description": "A Basket for ... your Baskets.",
+          "DisplayName": "{{i18n:Junimos.Displayname}}",
+          "Description": "{{i18n:Junimos.Description}}",
           "CanBeLostOnDeath" : false,
           "Type": "Basket",
           "Category": -99,
           "Price": 25000,
-          "Texture": "Mods/{{ModId}}/Tools",
+          "Texture": "Mods/{{ModPrefix}}/Tools",
           "SpriteIndex": 4,
           "SetProperties": {
             "InstantUse": true,
             "IsEfficient": true
           },
           "ModData": {
-            "{{ModId}}.BasketType": "Junimos",
-            "{{ModId}}.BasketId": "JunimoChests",
-            "{{ModId}}.SlotCapacity": "9",
-            "{{ModId}}.Inception": true,
+            "{{ModPrefix}}.BasketType": "Junimos",
+            "{{ModPrefix}}.BasketId": "JunimoChests",
+            "{{ModPrefix}}.SlotCapacity": 9,
+            "{{ModPrefix}}.Inception": true,
           }
         }
       }

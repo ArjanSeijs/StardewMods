@@ -4,25 +4,25 @@
       "Action": "EditData",
       "Target": "Data/Tools",
       "Entries": {
-        "{{ModPrefix}}.BasketTackle": {
-          "Name": "{{ModPrefix}}.BasketTackle",
+        "{{ModPrefix}}.BasketGems": {
+          "Name": "{{ModPrefix}}.BasketGems",
           "ClassName": "GenericTool",
-          "DisplayName": "{{i18n:Tackle.Displayname}}",
-          "Description": "{{i18n:Tackle.Description}}",
+          "DisplayName": "{{i18n:Gem.Displayname}}",
+          "Description": "{{i18n:Gem.Description}}",
           "CanBeLostOnDeath" : false,
           "Type": "Basket",
           "Category": -99,
-          "Price": 500,
+          "Price": 1500,
           "Texture": "Mods/{{ModPrefix}}/Tools",
-          "SpriteIndex": 6,
+          "SpriteIndex": 2,
           "SetProperties": {
             "InstantUse": true,
             "IsEfficient": true
           },
           "ModData": {
-            "{{ModPrefix}}.BasketType": "Tackle",
+            "{{ModPrefix}}.BasketType": "Gems",
             "{{ModPrefix}}.SlotCapacity": 15,
-            "{{ModPrefix}}.ContextTagsQuery": "category_bait || category_tackle || item_bait_maker "
+            "{{ModPrefix}}.ContextTagsQuery": "category_gem || category_mineral "
           },
         }
       }

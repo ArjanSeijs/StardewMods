@@ -1,0 +1,48 @@
+{
+  "Changes": [
+    {
+      "Action": "EditData",
+      "Target": "Data/Shops",
+      "TargetField": [
+        "SeedShop",
+        "Items"
+      ],
+      "Entries": {
+        "{{ModPrefix}}.Basket": {
+          "Id": "{{ModPrefix}}.Basket",
+          "ItemId": "{{ModPrefix}}.Basket",
+          "Price": 2500,
+          "AvoidRepeat": true
+        }
+      },
+      "MoveEntries": [
+        {
+          "Id": "{{ModPrefix}}.Basket",
+          "BeforeId": "GrassStarter"
+        }
+      ]
+    },
+    {
+      "Action": "EditData",
+      "Target": "Data/Shops",
+      "TargetField": [
+        "FishShop",
+        "Items"
+      ],
+      "Entries": {
+        "{{ModPrefix}}.BasketTackle": {
+          "Id": "{{ModPrefix}}.BasketTackle",
+          "ItemId": "{{ModPrefix}}.BasketTackle",
+          "Price": 500,
+          "AvoidRepeat": true
+        }
+      },
+      "MoveEntries": [
+        {
+          "Id": "{{ModPrefix}}.BasketTackle",
+          "BeforeId": "BambooPole"
+        }
+      ]
+    },
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "Changes": [
+    {
+      "Action": "EditData",
+      "Target": "Data/Tools",
+      "Entries": {
+        "{{ModPrefix}}.BasketCooler": {
+          "Name": "{{ModPrefix}}.BasketCooler",
+          "ClassName": "GenericTool",
+          "DisplayName": "{{i18n:Cooler.Displayname}}",
+          "Description": "{{i18n:Cooler.Description}}",
+          "CanBeLostOnDeath" : false,
+          "Type": "Basket",
+          "Category": -99,
+          "Price": 1200,
+          "Texture": "Mods/{{ModPrefix}}/Tools",
+          "SpriteIndex": 1,
+          "SetProperties": {
+            "InstantUse": true,
+            "IsEfficient": true
+          },
+          "ModData": {
+            "{{ModPrefix}}.BasketType": "Cooler",
+            "{{ModPrefix}}.SlotCapacity": 21,
+            "{{ModPrefix}}.StackCapacity": 16,
+            "{{ModPrefix}}.ContextTagsQuery": "category_greens || category_fruits || category_vegetable || category_fish || category_cooking"
+          }
+        }
+      }
+    },
+  ]
+}

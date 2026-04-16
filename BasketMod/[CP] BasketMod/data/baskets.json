@@ -2,7 +2,35 @@
   "Changes": [
     {
       "Action": "Include",
-      "FromFile": "data/baskets/default.json, data/baskets/tacklebox.json, data/baskets/inception.json, data/baskets/junimos.json"
+      "FromFile": "data/baskets/default.json"
+    },
+    {
+      "Action": "Include",
+      "FromFile": "data/baskets/cooler.json"
+    },
+    {
+      "Action": "Include",
+      "FromFile": "data/baskets/gems.json"
+    },
+    {
+      "Action": "Include",
+      "FromFile": "data/baskets/inception.json"
+    },
+    {
+      "Action": "Include",
+      "FromFile": "data/baskets/junimos.json"
+    },
+    {
+      "Action": "Include",
+      "FromFile": "data/baskets/museum.json"
+    },
+    {
+      "Action": "Include",
+      "FromFile": "data/baskets/tacklebox.json"
+    },
+    {
+      "Action": "Include",
+      "FromFile": "data/baskets/woven.json"
     }
   ]
 }

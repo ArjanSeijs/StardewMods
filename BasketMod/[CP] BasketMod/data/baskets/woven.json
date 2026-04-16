@@ -1,0 +1,31 @@
+{
+  "Changes": [
+    {
+      "Action": "EditData",
+      "Target": "Data/Tools",
+      "Entries": {
+        "{{ModPrefix}}.BasketWoven": {
+          "Name": "{{ModPrefix}}.BasketWoven",
+          "ClassName": "GenericTool",
+          "DisplayName": "{{i18n:Woven.Displayname}}",
+          "Description": "{{i18n:Woven.Description}}",
+          "CanBeLostOnDeath" : false,
+          "Type": "Basket",
+          "Category": -99,
+          "Price": 1500,
+          "Texture": "Maps/springobjects",
+          "SpriteIndex": 790,
+          "SetProperties": {
+            "InstantUse": true,
+            "IsEfficient": true
+          },
+          "ModData": {
+            "{{ModPrefix}}.BasketType": "Woven",
+            "{{ModPrefix}}.SlotCapacity": 15,
+            "{{ModPrefix}}.ContextTagsQuery": "category_greens || category_fruits || category_vegetable || category_seeds || category_flowers"
+          },
+        }
+      }
+    },
+  ]
+}

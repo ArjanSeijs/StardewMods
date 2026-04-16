@@ -1,0 +1,18 @@
+{
+  "Basket.Displayname": "Shoulder Bag",
+  "Basket.Description": "A Shoulder bag that can hold up to {{DefaultItemCapacity}} items",
+  "Cooler.Displayname": "Cooler",
+  "Cooler.Description": "Keep your perishables fresh",
+  "Gem.Displayname": "Gem Box",
+  "Gem.Description": "To store all your shinies",
+  "Inception.Displayname": "Basket Basket",
+  "Inception.Description": "A Basket for ... other baskets",
+  "Junimos.Displayname": "Junimo Crate",
+  "Junimos.Description": "A portable version of your Junimo chest",
+  "Museum.Displayname": "Keepsake Box",
+  "Museum.Description": "To store the rare artifacts",
+  "Tackle.Displayname": "Tackle Box",
+  "Tackle.Description": "A box to store all your fishing needs",
+  "Woven.Displayname": "Woven Basket",
+  "Woven.Description": "A woven basket"
+}

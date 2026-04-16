@@ -4,26 +4,26 @@
       "Action": "EditData",
       "Target": "Data/Tools",
       "Entries": {
-        "{{ModId}}.Basket": {
-          "Name": "{{ModId}}.Basket",
+        "{{ModPrefix}}.Basket": {
+          "Name": "{{ModPrefix}}.Basket",
           "ClassName": "GenericTool",
-          "DisplayName": "Plain Basket",
-          "Description": "A Plain Basket.",
+          "DisplayName": "{{i18n:Basket.Displayname}}",
+          "Description": "{{i18n:Basket.Description |DefaultItemCapacity={{DefaultItemCapacity}}}}",
           "CanBeLostOnDeath" : false,
           "Type": "Basket",
           "Category": -99,
           "Price": 1200,
-          "Texture": "Mods/{{ModId}}/Tools",
+          "Texture": "Mods/{{ModPrefix}}/Tools",
           "SpriteIndex": 0,
           "SetProperties": {
             "InstantUse": true,
             "IsEfficient": true
           },
           "ModData": {
-            "{{ModId}}.BasketType": "Default",
-            "{{ModId}}.SlotCapacity": "{{DefaultSlotCapacity}}",
-            "{{ModId}}.ItemCapacity": "{{DefaultItemCapacity}}",
-            "{{ModId}}.StackCapacity": "{{DefaultStackSize}}",
+            "{{ModPrefix}}.BasketType": "Default",
+            "{{ModPrefix}}.SlotCapacity": "{{DefaultSlotCapacity}}",
+            "{{ModPrefix}}.ItemCapacity": "{{DefaultItemCapacity}}",
+            "{{ModPrefix}}.StackCapacity": "{{DefaultStackSize}}",
           }
         }
       }
