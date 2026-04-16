@@ -94,4 +94,9 @@ public static class Extensions
     {
         return int.TryParse(str, out var v) ? v : null;
     }
+
+    public static int Min(int a, int b, int c)
+    {
+        return Math.Min(Math.Min(a, b), c);
+    }
 }

@@ -148,7 +148,7 @@ public class BasketInventory : IInventory
 
         if (Inventory.Count >= SlotCapacity)
             return item;
-        var itemResized = item.GetAmount(Math.Min(item.Stack, StackCapacity));
+        var itemResized = item.GetAmount(Extensions.Min(item.Stack, StackCapacity, ItemRemainingCapacity));
         Inventory.Add(itemResized);
         return item.ConsumeStack(itemResized.Stack);
     }
