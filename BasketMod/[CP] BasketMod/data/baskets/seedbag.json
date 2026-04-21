@@ -4,25 +4,25 @@
       "Action": "EditData",
       "Target": "Data/Tools",
       "Entries": {
-        "{{ModPrefix}}.BasketGems": {
-          "Name": "{{ModPrefix}}.BasketGems",
+        "{{ModPrefix}}.BasketSeed": {
+          "Name": "{{ModPrefix}}.BasketSeed",
           "ClassName": "GenericTool",
-          "DisplayName": "{{i18n:Gem.Displayname}}",
-          "Description": "{{i18n:Gem.Description}}",
+          "DisplayName": "{{i18n:Seed.Displayname}}",
+          "Description": "{{i18n:Seed.Description}}",
           "CanBeLostOnDeath" : false,
           "Type": "Basket",
           "Category": -99,
           "Price": 1500,
           "Texture": "Mods/{{ModPrefix}}/Tools",
-          "SpriteIndex": 2,
+          "SpriteIndex": 7,
           "SetProperties": {
             "InstantUse": true,
             "IsEfficient": true
           },
           "ModData": {
-            "{{ModPrefix}}.BasketType": "Gems",
+            "{{ModPrefix}}.BasketType": "Seed",
             "{{ModPrefix}}.SlotCapacity": 15,
-            "{{ModPrefix}}.ContextTagsQuery": "category_gem || category_minerals "
+            "{{ModPrefix}}.ContextTagsQuery": "category_seeds"
           },
         }
       }

@@ -1,9 +1,6 @@
-using System.Diagnostics.CodeAnalysis;
-using BasketMod.basket;
-using Netcode;
 using StardewValley;
-using StardewValley.Tools;
-using Object = StardewValley.Object;
+using StardewValley.Inventories;
+using SObject = StardewValley.Object;
 
 namespace BasketMod;
 
@@ -75,7 +72,7 @@ public static class Extensions
         if (num == 1)
             return otherStack.Stack;
         item.stack.Value += otherStack.Stack;
-        if (item is Object object1 && otherStack is Object object2 && object1.IsSpawnedObject &&
+        if (item is SObject object1 && otherStack is SObject object2 && object1.IsSpawnedObject &&
             !object2.IsSpawnedObject)
             object1.IsSpawnedObject = false;
         if (item.stack.Value <= num)
@@ -99,4 +96,11 @@ public static class Extensions
     {
         return Math.Min(Math.Min(a, b), c);
     }
+
+    public static bool IsEmpty(this Inventory? inventory, bool onNull = true)
+    {
+        if (inventory == null) return onNull;
+        return !inventory.HasAny();
+    }
+
 }

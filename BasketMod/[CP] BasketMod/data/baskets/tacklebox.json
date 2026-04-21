@@ -21,7 +21,7 @@
           },
           "ModData": {
             "{{ModPrefix}}.BasketType": "Tackle",
-            "{{ModPrefix}}.SlotCapacity": 15,
+            "{{ModPrefix}}.SlotCapacity": 30,
             "{{ModPrefix}}.ContextTagsQuery": "category_bait || category_tackle || item_bait_maker "
           },
         }

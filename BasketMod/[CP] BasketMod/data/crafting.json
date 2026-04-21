@@ -1,3 +1,75 @@
 {
-  "Changes": []
+  "Changes": [
+    /* ==== Crafting ==== */
+    {
+      "Action": "EditData",
+      "Target": "Data/CraftingRecipes",
+      /*"When": {
+        TODO basket quest finished
+      },*/
+      "Entries": {
+        "{{ModPrefix}}.BasketWoven": "771 20 /Home/{{ModPrefix}}.BasketWoven/false/default"
+      }
+    },
+    /* ==== Museum ==== */
+    {
+      "Action": "EditData",
+      "Target": "Data/MuseumRewards",
+      "Entries": {
+        /* === Keep Sake Box === */
+        "{{ModPrefix}}.BasketMuseum": {
+          "TargetContextTags": [
+            {
+              "Tag": "item_type_arch",
+              "Count": 1
+            },
+          ],
+          "RewardItemId": "(T){{ModPrefix}}.BasketMuseum",
+          "RewardItemCount": 1,
+          "RewardItemIsSpecial": true,
+          "FlagOnCompletion": true
+        }
+      }
+    },
+    /* ==== Lost item shop ==== */
+    {
+      "Action": "EditData",
+      "Target": "Data/LostItemsShop",
+      "Entries": {
+        /* === Keep Sake Box === */
+        "{{ModPrefix}}.BasketMuseumLost": {
+          "Id": "{{ModPrefix}}.BasketMuseumLost",
+          "ItemId": "(T){{ModPrefix}}.BasketMuseum",
+          "RequireMailReceived": null,
+          "RequireEventSeen": null,
+        }
+      }
+    },
+    /* ==== Garbage Cans ==== */
+    {
+      "Action": "EditData",
+      "Target": "Data/GarbageCans",
+      "TargetField": [
+        "GarbageCans",
+        "BeforeAll",
+        "Items"
+      ],
+      "Entries": {
+        /* === Trash Can === */
+        "{{ModPrefix}}.TrashCan": {
+          "IgnoreBaseChance": true,
+          "ID": "{{ModPrefix}}.TrashCan",
+          "Condition": "RANDOM 0.01 @addDailyLuck",
+          "ItemId": "(T){{ModPrefix}}.BasketTrash",
+          "IsMegaSuccess": true
+        }
+      },
+      "MoveEntries": [
+        {
+          "ID": "{{ModPrefix}}.TrashCan",
+          "BeforeId": "Base_GarbageHat"
+        }
+      ]
+    }
+  ]
 }

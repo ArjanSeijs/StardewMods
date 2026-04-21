@@ -1,5 +1,6 @@
 {
   "Changes": [
+    /* ==== Pierre ==== */
     {
       "Action": "EditData",
       "Target": "Data/Shops",
@@ -8,10 +9,18 @@
         "Items"
       ],
       "Entries": {
+        /* === Shoulderbag === */
         "{{ModPrefix}}.Basket": {
           "Id": "{{ModPrefix}}.Basket",
           "ItemId": "{{ModPrefix}}.Basket",
-          "Price": 2500,
+          "Price": 1200,
+          "AvoidRepeat": true
+        },
+        /* === Seed pouch === */
+        "{{ModPrefix}}.BasketSeed": {
+          "Id": "{{ModPrefix}}.BasketSeed",
+          "ItemId": "{{ModPrefix}}.BasketSeed",
+          "Price": 200,
           "AvoidRepeat": true
         }
       },
@@ -22,6 +31,31 @@
         }
       ]
     },
+    /* ==== Saloon ==== */
+    {
+      "Action": "EditData",
+      "Target": "Data/Shops",
+      "TargetField": [
+        "Saloon",
+        "Items"
+      ],
+      "Entries": {
+        /* === Cooler === */
+        "{{ModPrefix}}.BasketCooler": {
+          "Id": "{{ModPrefix}}.BasketCooler",
+          "ItemId": "{{ModPrefix}}.BasketCooler",
+          "Price": 1900,
+          "AvoidRepeat": true
+        }
+      },
+      "MoveEntries": [
+        {
+          "Id": "{{ModPrefix}}.Basket",
+          "BeforeId": "GrassStarter"
+        }
+      ]
+    },
+    /* ==== Fish Shop ==== */
     {
       "Action": "EditData",
       "Target": "Data/Shops",
@@ -30,6 +64,7 @@
         "Items"
       ],
       "Entries": {
+        /* === Tackle Box === */
         "{{ModPrefix}}.BasketTackle": {
           "Id": "{{ModPrefix}}.BasketTackle",
           "ItemId": "{{ModPrefix}}.BasketTackle",
@@ -44,5 +79,58 @@
         }
       ]
     },
+    /* ==== Qi Shops ==== */
+    {
+      "Action": "EditData",
+      "Target": "Data/Shops",
+      "TargetField": [
+        "QiGemShop",
+        "Items"
+      ],
+      "Entries": {
+        /* === Junimos === */
+        "{{ModPrefix}}.BasketJunimos": {
+          "Id": "{{ModPrefix}}.BasketJunimos",
+          "ItemId": "{{ModPrefix}}.BasketJunimos",
+          "Price": 500,
+          "AvoidRepeat": true
+        },
+        /* === Inception === */
+        "{{ModPrefix}}.BasketInception": {
+          "Id": "{{ModPrefix}}.BasketInception",
+          "ItemId": "{{ModPrefix}}.BasketInception",
+          "Price": 500,
+          "AvoidRepeat": true
+        }
+      },
+      "MoveEntries": [
+        {
+          "Id": "{{ModPrefix}}.BasketJunimos",
+          "BeforeId": "JunimoChest"
+        },
+        {
+          "Id": "{{ModPrefix}}.BasketInception",
+          "BeforeId": "JunimoChest"
+        }
+      ]
+    },
+    /* ==== Blacksmith ==== */
+    {
+      "Action": "EditData",
+      "Target": "Data/Shops",
+      "TargetField": [
+        "Blacksmith",
+        "Items"
+      ],
+      "Entries": {
+        /* === Gem Bag === */
+        "{{ModPrefix}}.BasketGems": {
+          "Id": "{{ModPrefix}}.BasketGems",
+          "ItemId": "{{ModPrefix}}.BasketGems",
+          "Price": 1500,
+          "AvoidRepeat": true
+        }
+      },
+    }
   ]
 }

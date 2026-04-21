@@ -1,0 +1,31 @@
+{
+  "Changes": [
+    {
+      "Action": "EditData",
+      "Target": "Data/Tools",
+      "Entries": {
+        "{{ModPrefix}}.BasketTrash": {
+          "Name": "{{ModPrefix}}.BasketTrash",
+          "ClassName": "GenericTool",
+          "DisplayName": "{{i18n:Trash.Displayname}}",
+          "Description": "{{i18n:Trash.Description}}",
+          "CanBeLostOnDeath" : false,
+          "Type": "Basket",
+          "Category": -99,
+          "Price": 1500,
+          "Texture": "Tilesheets/tools",
+          "SpriteIndex": 14,
+          "SetProperties": {
+            "InstantUse": true,
+            "IsEfficient": true
+          },
+          "ModData": {
+            "{{ModPrefix}}.BasketType": "Trash",
+            "{{ModPrefix}}.SlotCapacity": 9,
+            "{{ModPrefix}}.ContextTagsQuery": "category_junk"
+          },
+        }
+      }
+    },
+  ]
+}

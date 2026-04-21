@@ -8,11 +8,11 @@
           "Name": "{{ModPrefix}}.Basket",
           "ClassName": "GenericTool",
           "DisplayName": "{{i18n:Basket.Displayname}}",
-          "Description": "{{i18n:Basket.Description |DefaultItemCapacity={{DefaultItemCapacity}}}}",
+          "Description": "{{i18n:Basket.Description |Total={{query:{{DefaultSlotCapacity}}*{{DefaultStackSize}} }} }}",
           "CanBeLostOnDeath" : false,
           "Type": "Basket",
           "Category": -99,
-          "Price": 1200,
+          "Price": 400,
           "Texture": "Mods/{{ModPrefix}}/Tools",
           "SpriteIndex": 0,
           "SetProperties": {
@@ -22,7 +22,6 @@
           "ModData": {
             "{{ModPrefix}}.BasketType": "Default",
             "{{ModPrefix}}.SlotCapacity": "{{DefaultSlotCapacity}}",
-            "{{ModPrefix}}.ItemCapacity": "{{DefaultItemCapacity}}",
             "{{ModPrefix}}.StackCapacity": "{{DefaultStackSize}}",
           }
         }

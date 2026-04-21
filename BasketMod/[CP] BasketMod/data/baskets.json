@@ -26,7 +26,15 @@
     },
     {
       "Action": "Include",
+      "FromFile": "data/baskets/seedbag.json"
+    },
+    {
+      "Action": "Include",
       "FromFile": "data/baskets/tacklebox.json"
+    },
+    {
+      "Action": "Include",
+      "FromFile": "data/baskets/trashbag.json"
     },
     {
       "Action": "Include",

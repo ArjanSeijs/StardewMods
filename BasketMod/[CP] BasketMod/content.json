@@ -2,12 +2,8 @@
   "Format": "2.8.0",
   "ConfigSchema": {
     "DefaultSlotCapacity": {
-      "AllowValues": "2, 3, 4, 5, 6, 7, 8, 9, 12, 15, 18, 32",
+      "AllowValues": "2, 3, 4, 5, 6, 7, 8, 9, 12, 15, 18, 30",
       "Default": "9"
-    },
-    "DefaultItemCapacity": {
-      "AllowValues": "1, 2, 4, 15, 25, 50, 100, 200, 500, 99000",
-      "Default": "25"
     },
     "DefaultStackSize": {
       "AllowValues": "1, 2, 4, 16, 32, 64, 999",
