@@ -1,4 +1,5 @@
-﻿using BasketMod.basket;
+﻿using BasketMod.api;
+using BasketMod.basket;
 using HarmonyLib;
 using StardewModdingAPI;
 using StardewModdingAPI.Events;
@@ -27,21 +28,32 @@ public class ModEntry : Mod
             ListInventoriesCommand);
         RecoverInventory = new Inventory();
         helper.Events.GameLoop.Saving += OnSaving;
+        helper.Events.GameLoop.GameLaunched += OnGameLaunched;
 
-        void OnSaving(object? sender, SavingEventArgs e)
-        {
-            // Cleanup empty inventories
-            var keys = from value in Game1.player.team.globalInventories.Keys
-                where value.StartsWith(QualifiedName.InventoryIDPrefix) &&
-                      Game1.player.team.globalInventories[value].IsEmpty()
-                select value;
-            foreach (var key in keys)
-            {
-                Game1.player.team.globalInventories.Remove(key);
-            }
-        }
 
         Harmony();
+    }
+
+    private void OnGameLaunched(object? sender, GameLaunchedEventArgs e)
+    {
+        var spacecore = Helper.ModRegistry.GetApi<ISpaceCoreApi>("spacechase0.SpaceCore");
+        if (spacecore != null)
+        {
+            SpaceCoreEquipment.RegisterSlots(this, spacecore);
+        }
+    }
+
+    void OnSaving(object? sender, SavingEventArgs e)
+    {
+        // Cleanup empty inventories
+        var keys = from value in Game1.player.team.globalInventories.Keys
+            where value.StartsWith(QualifiedName.InventoryIDPrefix) &&
+                  Game1.player.team.globalInventories[value].IsEmpty()
+            select value;
+        foreach (var key in keys)
+        {
+            Game1.player.team.globalInventories.Remove(key);
+        }
     }
 
     private void Harmony()

@@ -26,4 +26,9 @@ public static class QualifiedName
     {
         return $"{InventoryIDPrefix}.{basketId}";
     }
+
+    public static string SpaceCoreSlot(int slot)
+    {
+        return $"{InventoryIDPrefix}.Equipment.{slot}";
+    }
 }
