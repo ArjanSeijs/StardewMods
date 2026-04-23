@@ -11,6 +11,8 @@ namespace BasketMod;
 
 public class ModEntry : Mod
 {
+    private ISpaceCoreApi? _spacecore;
+
     public static ModEntry Mod { get; private set; } = null!;
 
     /// <summary>
@@ -18,28 +20,44 @@ public class ModEntry : Mod
     /// </summary>
     public Inventory RecoverInventory { get; private set; } = null!;
 
+    public Config Config { get; set; } = null!;
+
     public override void Entry(IModHelper helper)
     {
         Mod = this;
-        helper.ConsoleCommands.Add("basket_open", "basket_open <id> <slotCapacity?> <itemCapacity?>,", BasketCommand);
-        helper.ConsoleCommands.Add("basket_recover", "Menu that stores items in case something goes wrong",
-            BasketRecoverCommand);
-        helper.ConsoleCommands.Add("basket_list_inventories", "basket_list_inventories <all?> ",
-            ListInventoriesCommand);
+        Config = Helper.ReadConfig<Config>();
         RecoverInventory = new Inventory();
+        
+        var commands = helper.ConsoleCommands;
+        commands.Add("basket_open", "basket_open <id> <slotCapacity?> <itemCapacity?>,", BasketCommand);
+        commands.Add("basket_recover", "Menu that stores items in case something goes wrong", BasketRecoverCommand);
+        commands.Add("basket_list_inventories", "basket_list_inventories <all?> ", ListInventoriesCommand);
+        
         helper.Events.GameLoop.Saving += OnSaving;
         helper.Events.GameLoop.GameLaunched += OnGameLaunched;
-
-
+        helper.Events.Input.ButtonPressed += OnButtonPressed;
+        
         Harmony();
+    }
+
+    private void OnButtonPressed(object? sender, ButtonPressedEventArgs e)
+    {
+        if (_spacecore is null) return;
+        SpaceCoreEquipment.OnButtonPressed(this, _spacecore);
     }
 
     private void OnGameLaunched(object? sender, GameLaunchedEventArgs e)
     {
-        var spacecore = Helper.ModRegistry.GetApi<ISpaceCoreApi>("spacechase0.SpaceCore");
-        if (spacecore != null)
+        _spacecore = Helper.ModRegistry.GetApi<ISpaceCoreApi>("spacechase0.SpaceCore");
+        if (_spacecore != null)
         {
-            SpaceCoreEquipment.RegisterSlots(this, spacecore);
+            SpaceCoreEquipment.RegisterSlots(this, _spacecore);
+        }
+
+        var configMenu = Helper.ModRegistry.GetApi<IGenericModConfigMenuApi>("spacechase0.GenericModConfigMenu");
+        if (configMenu != null)
+        {
+            Config.Initialize(this, configMenu);
         }
     }
 
