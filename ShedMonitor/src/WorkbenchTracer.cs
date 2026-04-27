@@ -40,7 +40,7 @@ public class WorkbenchTracer
             try
             {
                 if (justCheckingForActivity || !__result) return;
-                ModEntry.Mod.Monitor.Log($"Instance: {__instance.Name} {__instance.TileLocation}");
+                ModEntry.Mod.Monitor.Log($"Instance: {__instance.Name} {__instance.TileLocation}", LogLevel.Debug);
                 _wbTracer = __instance;
             }
             catch (Exception ex)
@@ -54,15 +54,7 @@ public class WorkbenchTracer
     {
         if (Game1.activeClickableMenu is CraftingPage && _wbTracer is not null)
         {
-            var menu = ModEntry.Mod.ViewEngine.CreateMenuFromAsset(
-                $"Mods/{ModEntry.Mod.ModManifest.Name}/Views/StorageViewSmall",
-                ChestListModel.CreateFromLocation(Game1.currentLocation));
-
-            ModEntry.Mod.Monitor.Log($"Menus: {Game1.onScreenMenus.Count}", LogLevel.Debug);
-            foreach (var clickableMenu in Game1.onScreenMenus)
-            {
-                ModEntry.Mod.Monitor.Log($"{clickableMenu}", LogLevel.Debug);
-            }
+            
         }
 
         _wbTracer = null;

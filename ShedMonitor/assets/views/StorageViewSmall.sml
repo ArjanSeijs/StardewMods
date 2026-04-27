@@ -17,6 +17,10 @@
         <scrollable peeking="128">
             <grid layout="stretch content" item-layout="length: 96" item-spacing="16,16"
                 horizontal-item-alignment="middle">
+                <lane *repeat={WorkbenchesSorted} orientation="vertical" horizontal-content-alignment="middle"
+                                      click=|Open()| focusable="true">
+                <include name="Mods/ShedMonitor/Views/WorkbenchDisplayView" *context={:this} />
+                </lane>
                 <lane *repeat={ChestsSorted} orientation="vertical" horizontal-content-alignment="middle"
                       tooltip={:DisplayName} click=|Open()| focusable="true">
 

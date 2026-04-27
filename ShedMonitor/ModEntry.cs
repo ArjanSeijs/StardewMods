@@ -67,8 +67,6 @@ public sealed class ModEntry : Mod
 
         // print button presses to the console window
         if (e.Button == Config.Instance.OpenKey)
-            Game1.activeClickableMenu = ViewEngine.CreateMenuFromAsset(
-                $"Mods/{ModManifest.Name}/Views/StorageViewSmall",
-                ChestListModel.CreateFromLocation(Game1.currentLocation));
+            Game1.activeClickableMenu = StorageModel.CreateViewFromLocation(Game1.currentLocation);
     }
 }

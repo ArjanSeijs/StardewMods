@@ -6,16 +6,22 @@ namespace ShedMonitor;
 
 public static class Util
 {
+
     public static Item? GetSignItemNearChest(Chest chest)
     {
         var chestTile = chest.TileLocation;
         var location = chest.Location;
+        return GetSignItemNearLocation(location, chestTile);
+    }
+
+    public static Item? GetSignItemNearLocation(GameLocation location,  Vector2 tileLocation)
+    {
         Vector2[] tilesToCheck =
         {
-            new(chestTile.X, chestTile.Y - 1), // top
-            new(chestTile.X - 1, chestTile.Y), // left
-            new(chestTile.X + 1, chestTile.Y), // right
-            new(chestTile.X, chestTile.Y + 1), // bottom
+            new(tileLocation.X, tileLocation.Y - 1), // top
+            new(tileLocation.X - 1, tileLocation.Y), // left
+            new(tileLocation.X + 1, tileLocation.Y), // right
+            new(tileLocation.X, tileLocation.Y + 1), // bottom
         };
 
         foreach (var tile in tilesToCheck)
@@ -29,9 +35,9 @@ public static class Util
         return null;
     }
 
-    public static IEnumerable<Chest> GetChestsFromLocation(GameLocation location)
+    public static IEnumerable<T> OfType<T>(this GameLocation location)
     {
-        return location.Objects.Values.OfType<Chest>();
+        return location.Objects.Values.OfType<T>();
     }
 
     public static string ToHex(this Color color, int? alpha = null)
