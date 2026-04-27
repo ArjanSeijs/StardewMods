@@ -29,6 +29,11 @@ public record ChestModel(Chest Chest)
     /// <returns></returns>
     public bool Open()
     {
+        if (Game1.activeClickableMenu is not null)
+        {
+            Game1.nextClickableMenu.Add(Game1.activeClickableMenu);
+        }
+
         Chest.ShowMenu();
         Game1.playSound(Chest.fridge.Value ? "doorCreak" : "openChest");
         Chest.performOpenChest();

@@ -61,11 +61,9 @@ public sealed class ModEntry : Mod
     /// <param name="e">The event data.</param>
     private void OnButtonPressed(object? sender, ButtonPressedEventArgs e)
     {
-        // ignore if player hasn't loaded a save yet
         if (!Context.IsWorldReady || !Context.IsPlayerFree)
             return;
-
-        // print button presses to the console window
+        
         if (e.Button == Config.Instance.OpenKey)
             Game1.activeClickableMenu = StorageModel.CreateViewFromLocation(Game1.currentLocation);
     }

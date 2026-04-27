@@ -40,7 +40,7 @@ public class WorkbenchTracer
             try
             {
                 if (justCheckingForActivity || !__result) return;
-                ModEntry.Mod.Monitor.Log($"Instance: {__instance.Name} {__instance.TileLocation}", LogLevel.Debug);
+                ModEntry.Mod.Monitor.Log($"Instance: {__instance.Name} {__instance.TileLocation}");
                 _wbTracer = __instance;
             }
             catch (Exception ex)
@@ -52,11 +52,6 @@ public class WorkbenchTracer
 
     public static void OnMenuChanged(MenuChangedEventArgs e)
     {
-        if (Game1.activeClickableMenu is CraftingPage && _wbTracer is not null)
-        {
-            
-        }
-
         _wbTracer = null;
     }
 }
