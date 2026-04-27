@@ -10,7 +10,7 @@
   "UniqueID": "EternalSoap.ShedMonitor",
   "Name": "ShedMonitor",
   "Author": "EternalSoap",
-  "Version": "1.0.0-Debug",
+  "Version": "1.0.0",
   "Description": "View the Inventory of your Shed as a big Chest",
   "MinimumApiVersion": "4.5.2",
   "MinimumGameVersion": "1.6",

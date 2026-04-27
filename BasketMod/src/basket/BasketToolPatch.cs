@@ -42,6 +42,7 @@ public static class BasketToolPatch
     {
         try
         {
+            if(__instance.PerformSpecial(location,x,y,who)) return true;
             if (!__instance.AsBasket(out var basket)) return true;
 
             var inv = new BasketInventory(basket!.Value);

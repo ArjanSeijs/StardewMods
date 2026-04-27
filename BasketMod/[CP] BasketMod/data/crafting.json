@@ -50,9 +50,7 @@
       "Action": "EditData",
       "Target": "Data/GarbageCans",
       "TargetField": [
-        "GarbageCans",
-        "BeforeAll",
-        "Items"
+        "BeforeAll"
       ],
       "Entries": {
         /* === Trash Can === */

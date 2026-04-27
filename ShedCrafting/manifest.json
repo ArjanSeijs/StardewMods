@@ -10,7 +10,7 @@
   "UniqueID": "EternalSoap.ShedCrafting",
   "Name": "ShedCrafting",
   "Author": "EternalSoap",
-  "Version": "1.0.0-Debug",
+  "Version": "1.0.0",
   "Description": "Adds Chest Inside Building To Crafting Station",
   "MinimumApiVersion": "4.5.2",
   "MinimumGameVersion": "1.6",

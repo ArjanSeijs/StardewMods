@@ -14,12 +14,17 @@ public static class QualifiedName
     public static class Field
     {
         public const string BasketType = "EternalSoap.BasketMod.CP.BasketType";
+        public const string BasketSpecial = "EternalSoap.BasketMod.CP.BasketSpecial";
         public const string BasketId = "EternalSoap.BasketMod.CP.BasketId";
         public const string SlotCapacity = "EternalSoap.BasketMod.CP.SlotCapacity";
         public const string ItemCapacity = "EternalSoap.BasketMod.CP.ItemCapacity";
         public const string StackCapacity = "EternalSoap.BasketMod.CP.StackCapacity";
         public const string ContextTagsQuery = "EternalSoap.BasketMod.CP.ContextTagsQuery";
         public const string Inception = "EternalSoap.BasketMod.CP.Inception";   
+        
+        public const string XCoord = "EternalSoap.BasketMod.XCoord";  
+        public const string YCoord = "EternalSoap.BasketMod.YCoord";
+        public const string LocationID = "EternalSoap.BasketMod.LocationID";
     }
 
     public static string InventoryName(string basketId)
