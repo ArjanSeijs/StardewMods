@@ -92,24 +92,38 @@
         "{{ModPrefix}}.BasketJunimos": {
           "Id": "{{ModPrefix}}.BasketJunimos",
           "ItemId": "{{ModPrefix}}.BasketJunimos",
-          "Price": 500,
+          "TradeItemId": "(O)858",
+          "TradeItemAmount": 45,
           "AvoidRepeat": true
         },
         /* === Inception === */
         "{{ModPrefix}}.BasketInception": {
           "Id": "{{ModPrefix}}.BasketInception",
           "ItemId": "{{ModPrefix}}.BasketInception",
-          "Price": 500,
+          "TradeItemId": "(O)858",
+          "TradeItemAmount": 25,
+          "AvoidRepeat": true
+        },
+        /* === Inception === */
+        "{{ModPrefix}}.BasketLinked": {
+          "Id": "{{ModPrefix}}.BasketLinked",
+          "ItemId": "{{ModPrefix}}.BasketLinked",
+          "TradeItemId": "(O)858",
+          "TradeItemAmount": 50,
           "AvoidRepeat": true
         }
       },
       "MoveEntries": [
         {
-          "Id": "{{ModPrefix}}.BasketJunimos",
+          "Id": "{{ModPrefix}}.BasketInception",
           "BeforeId": "JunimoChest"
         },
         {
-          "Id": "{{ModPrefix}}.BasketInception",
+          "Id": "{{ModPrefix}}.BasketLinked",
+          "BeforeId": "JunimoChest"
+        },
+        {
+          "Id": "{{ModPrefix}}.BasketJunimos",
           "BeforeId": "JunimoChest"
         }
       ]

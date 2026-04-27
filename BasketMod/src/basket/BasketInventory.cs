@@ -60,6 +60,11 @@ public class BasketInventory : IInventory
         BasketData = basketData;
     }
 
+    
+    public bool IsEmpty()
+    {
+        return ItemCount == 0;
+    }
 
     /// <summary>
     /// <see cref="StardewValley.Objects.Chest.grabItemFromChest"/>
@@ -164,7 +169,7 @@ public class BasketInventory : IInventory
         if (Source == item) return false; // Cannot put self in self
         if (Inventory.Contains(item)) return true; // Can take all items out
         if (ItemCount >= ItemCapacity) return false; // Only if there is Space Left
-        if (item.AsBasket(out _)) return BasketData.Inception;
+        if (item.AsBasket(out _) || item.IsSpecial()) return BasketData.Inception;
         if (BasketData.ContextTagsQuery.Equals("")) return true; // No query so include all
         var disjunctions = BasketData.ContextTagsQuery.Split("||");
         var contextTags = item.GetContextTags();

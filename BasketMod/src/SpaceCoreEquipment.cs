@@ -7,7 +7,7 @@ namespace BasketMod;
 
 public static class SpaceCoreEquipment
 {
-    public const int MaxSlots = 3;
+    public const int MaxSlots = 5;
 
     public static void RegisterSlots(ModEntry mod, ISpaceCoreApi spacecore)
     {

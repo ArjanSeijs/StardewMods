@@ -19,6 +19,10 @@ public static class BasketToolPatch
             prefix: new HarmonyMethod(typeof(BasketToolPatch), nameof(DoFunction_Prefix))
         );
         harmony.Patch(
+            original: AccessTools.Method(typeof(Item), nameof(Item.canBeTrashed)),
+            prefix: new HarmonyMethod(typeof(BasketToolPatch), nameof(CanBeTrashed_Prefix))
+        );
+        harmony.Patch(
             original: AccessTools.Method(typeof(Tool), nameof(Tool.drawTooltip)),
             postfix: new HarmonyMethod(typeof(BasketToolPatch), nameof(DrawToolTip_PostFix))
         );
@@ -49,6 +53,22 @@ public static class BasketToolPatch
             inv.ShowMenu();
             Game1.playSound("tinyWhip");
             return false;
+        }
+        catch (Exception e)
+        {
+            ModEntry.Mod.Monitor.Log(e.ToString(), LogLevel.Error);
+            return true;
+        }
+    }
+
+    public static bool CanBeTrashed_Prefix(Tool __instance, ref bool __result)
+    {
+        try
+        {
+            if (!__instance.AsBasket(out var basket)) return true;
+            __result = new BasketInventory(basket!.Value).IsEmpty();;
+            return false;
+            
         }
         catch (Exception e)
         {
