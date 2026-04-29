@@ -26,7 +26,7 @@ public static class SpaceCoreEquipment
 
     private static bool SlotValidator(Item? arg)
     {
-        return arg is null || arg.IsBasket();
+        return arg is null || arg.IsBasket() || arg.IsSpecial();
     }
 
     public static void OnButtonPressed(ModEntry modEntry, ISpaceCoreApi spacecore)
@@ -35,9 +35,17 @@ public static class SpaceCoreEquipment
         {
             var keybind = ModEntry.Mod.Config.Buttons[i]?.IsDown() ?? false;
             var item = spacecore.GetItemInEquipmentSlot(Game1.player, QualifiedName.SpaceCoreSlot(i));
-            if (!keybind || item is null || !item.AsBasket(out var basket)) continue;
-            new BasketInventory(basket!.Value).ShowMenu();
-            break;
+            if (!keybind || item is null) continue;
+            if (item.AsBasket(out var basket))
+            {
+                new BasketInventory(basket!.Value).ShowMenu();
+                break;   
+            }
+
+            if (item.IsSpecial())
+            {
+                item.PerformSpecial();
+            }
         }
     }
 }

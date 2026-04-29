@@ -21,9 +21,9 @@ public static class BasketSpecial
         return item.IsLinked();
     }
 
-    public static bool PerformSpecial(this Tool tool, GameLocation location, int x, int y, Farmer who)
+    public static bool PerformSpecial(this Item tool, GameLocation location, int x, int y, Farmer who)
     {
-        if (!tool.IsLinked()) return false;
+        if (!tool.IsSpecial()) return false;
         if (location.getObjectAt(x, y) is Chest)
         {
             tool.modData[QualifiedName.Field.XCoord] = x.ToString();
@@ -33,20 +33,26 @@ public static class BasketSpecial
         }
         else
         {
-            var xPres = tool.modData.TryGetValue(QualifiedName.Field.XCoord, out var xCoord);
-            var yPres = tool.modData.TryGetValue(QualifiedName.Field.YCoord, out var yCoord);
-            var namePres = tool.modData.TryGetValue(QualifiedName.Field.LocationID, out var locationID);
-            if (!xPres || !yPres || !namePres || Game1.getLocationFromName(locationID) is not { } l ||
-                l.getObjectAt(int.Parse(xCoord), int.Parse(yCoord)) is not Chest chest)
-            {
-                Game1.playSound("clank");
-                return false;
-            }
-
-            Game1.playSound("openChest");
-            chest.ShowMenu();
+            if (!tool.PerformSpecial()) return false;
         }
 
+        return true;
+    }
+
+    public static bool PerformSpecial(this Item tool)
+    {
+        var xPres = tool.modData.TryGetValue(QualifiedName.Field.XCoord, out var xCoord);
+        var yPres = tool.modData.TryGetValue(QualifiedName.Field.YCoord, out var yCoord);
+        var namePres = tool.modData.TryGetValue(QualifiedName.Field.LocationID, out var locationID);
+        if (!xPres || !yPres || !namePres || Game1.getLocationFromName(locationID) is not { } l ||
+            l.getObjectAt(int.Parse(xCoord), int.Parse(yCoord)) is not Chest chest)
+        {
+            Game1.playSound("clank");
+            return false;
+        }
+
+        Game1.playSound("openChest");
+        chest.ShowMenu();
         return true;
     }
 }
