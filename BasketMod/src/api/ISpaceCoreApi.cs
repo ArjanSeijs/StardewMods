@@ -4,6 +4,7 @@ using StardewModdingAPI;
 using StardewValley;
 
 namespace BasketMod.api;
+#nullable disable
 
 public interface ISpaceCoreApi
 {

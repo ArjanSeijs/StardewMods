@@ -8,6 +8,8 @@ public class Config
 {
     public static void Initialize(ModEntry mod, IGenericModConfigMenuApi configMenu)
     {
+        ModEntry.Mod.Config = mod.Helper.ReadConfig<Config>();
+        
         configMenu.Register(mod.ModManifest,
             () => ModEntry.Mod.Config = new Config(),
             save: () => mod.Helper.WriteConfig(ModEntry.Mod.Config));
@@ -24,5 +26,5 @@ public class Config
         }
     }
 
-    public readonly KeybindList?[] Buttons = new KeybindList[SpaceCoreEquipment.MaxSlots];
+    public KeybindList?[] Buttons = new KeybindList[SpaceCoreEquipment.MaxSlots];
 }

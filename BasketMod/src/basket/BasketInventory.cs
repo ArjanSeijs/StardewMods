@@ -169,7 +169,8 @@ public class BasketInventory : IInventory
         if (Source == item) return false; // Cannot put self in self
         if (Inventory.Contains(item)) return true; // Can take all items out
         if (ItemCount >= ItemCapacity) return false; // Only if there is Space Left
-        if (item.AsBasket(out _) || item.IsSpecial()) return BasketData.Inception;
+        var basket = item.AsBasket();
+        if (basket is not null || item.IsSpecial()) return BasketData.Inception;
         if (BasketData.ContextTagsQuery.Equals("")) return true; // No query so include all
         var disjunctions = BasketData.ContextTagsQuery.Split("||");
         var contextTags = item.GetContextTags();

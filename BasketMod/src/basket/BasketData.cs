@@ -5,7 +5,7 @@ namespace BasketMod.basket;
 
 public static class BasketDataExtension
 {
-    public static bool IsBasket(this Item item)
+    public static bool IsBasket(this Item? item)
     {
         if (item is not GenericTool basket) return false;
         var data = basket.GetToolData().ModData;
@@ -17,23 +17,20 @@ public static class BasketDataExtension
     /// <param name="item"></param>
     /// <param name="basketData"></param>
     /// <returns></returns>
-    public static bool AsBasket(this Item item, out BasketData? basketData)
+    public static BasketData? AsBasket(this Item? item)
     {
         if (item is not GenericTool basket)
         {
-            basketData = null;
-            return false;
+            return null;
         }
 
         var data = basket.GetToolData().ModData;
         if (data is null || !data.TryGetValue(QualifiedName.Field.BasketType, out _))
         {
-            basketData = null;
-            return false;
+            return null;
         }
 
-        basketData = new BasketData(basket);
-        return true;
+        return new BasketData(basket);
     }
 }
 

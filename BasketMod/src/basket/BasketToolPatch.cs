@@ -47,9 +47,10 @@ public static class BasketToolPatch
         try
         {
             if(__instance.PerformSpecial(location,x,y,who)) return true;
-            if (!__instance.AsBasket(out var basket)) return true;
+            var basket = __instance.AsBasket();
+            if (basket is null) return true;
 
-            var inv = new BasketInventory(basket!.Value);
+            var inv = new BasketInventory(basket.Value);
             inv.ShowMenu();
             Game1.playSound("tinyWhip");
             return false;
@@ -65,8 +66,9 @@ public static class BasketToolPatch
     {
         try
         {
-            if (!__instance.AsBasket(out var basket)) return true;
-            __result = new BasketInventory(basket!.Value).IsEmpty();;
+            var basket = __instance.AsBasket();
+            if (basket is null) return true;
+            __result = new BasketInventory(basket.Value).IsEmpty();
             return false;
             
         }
@@ -92,13 +94,14 @@ public static class BasketToolPatch
     {
         try
         {
-            if (!__instance.AsBasket(out var basket)) return;
+            var basket = __instance.AsBasket();
+            if (basket is null) return;
 
             var xPos = x;
             var yPos = y + 16;
             Item? prevItem = null;
 
-            foreach (var item in new BasketInventory(basket!.Value).Take(7))
+            foreach (var item in new BasketInventory(basket.Value).Take(7))
             {
                 if (prevItem != null) xPos += item.DisplayName.Equals(prevItem.DisplayName) ? 16 : 32;
 
@@ -133,8 +136,9 @@ public static class BasketToolPatch
     {
         try
         {
-            if (!__instance.AsBasket(out var basket)) return;
-            if (new BasketInventory(basket!.Value).Count > 0) __result += new Point(0, 64);
+            var basket = __instance.AsBasket();
+            if (basket is null) return;
+            if (new BasketInventory(basket.Value).Count > 0) __result += new Point(0, 64);
         }
         catch (Exception e)
         {

@@ -36,15 +36,17 @@ public static class SpaceCoreEquipment
             var keybind = ModEntry.Mod.Config.Buttons[i]?.IsDown() ?? false;
             var item = spacecore.GetItemInEquipmentSlot(Game1.player, QualifiedName.SpaceCoreSlot(i));
             if (!keybind || item is null) continue;
-            if (item.AsBasket(out var basket))
+            var basket = item.AsBasket();
+            if (basket is not null)
             {
-                new BasketInventory(basket!.Value).ShowMenu();
+                new BasketInventory(basket.Value).ShowMenu();
                 break;   
             }
 
             if (item.IsSpecial())
             {
                 item.PerformSpecial();
+                break;
             }
         }
     }
