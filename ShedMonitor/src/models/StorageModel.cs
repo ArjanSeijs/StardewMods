@@ -1,16 +1,23 @@
 using PropertyChanged.SourceGenerator;
-using StardewUI;
 using StardewValley;
 using StardewValley.Menus;
 using StardewValley.Objects;
 
 namespace ShedMonitor.Models;
 
-public partial record StorageModel(string HeaderText, ChestModel[] Chests, WorkbenchModel[] WorkBenches)
+public partial record StorageModel(string HeaderText, ChestModel[] Chests, BuildingModel[] Buildings)
 {
-    // True, Sort Horizontal, False Sort Vertical
-    [Notify] private Direction _sort = _lastSort;
-    private static Direction _lastSort = Direction.East;
+    public enum SortDirection
+    {
+        North,
+        East,
+        South,
+        West,
+        Color
+    }
+
+    [Notify] private SortDirection _sort = _lastSort;
+    private static SortDirection _lastSort = SortDirection.East;
 
     //TODO Improve
     [DependsOn(nameof(Sort))]
@@ -20,50 +27,27 @@ public partial record StorageModel(string HeaderText, ChestModel[] Chests, Workb
         {
             return Sort switch
             {
-                Direction.North => Chests
+                SortDirection.North => Chests
                     .OrderBy(chest => chest.Chest.TileLocation.X)
                     .ThenByDescending(chest => chest.Chest.TileLocation.Y)
                     .ToArray(),
-                Direction.East => Chests
+                SortDirection.East => Chests
                     .OrderBy(chest => chest.Chest.TileLocation.Y)
                     .ThenBy(chest => chest.Chest.TileLocation.X)
                     .ToArray(),
-                Direction.South => Chests
+                SortDirection.South => Chests
                     .OrderBy(chest => chest.Chest.TileLocation.X)
                     .ThenBy(chest => chest.Chest.TileLocation.Y)
                     .ToArray(),
-                Direction.West => Chests
+                SortDirection.West => Chests
                     .OrderBy(chest => chest.Chest.TileLocation.Y)
                     .ThenByDescending(chest => chest.Chest.TileLocation.X)
                     .ToArray(),
-                _ => throw new ArgumentOutOfRangeException()
-            };
-        }
-    }
-
-
-    [DependsOn(nameof(Sort))]
-    public WorkbenchModel[] WorkbenchesSorted
-    {
-        get
-        {
-            return Sort switch
-            {
-                Direction.North => WorkBenches
-                    .OrderBy(chest => chest.Workbench.TileLocation.X)
-                    .ThenByDescending(chest => chest.Workbench.TileLocation.Y)
-                    .ToArray(),
-                Direction.East => WorkBenches
-                    .OrderBy(chest => chest.Workbench.TileLocation.Y)
-                    .ThenBy(chest => chest.Workbench.TileLocation.X)
-                    .ToArray(),
-                Direction.South => WorkBenches
-                    .OrderBy(chest => chest.Workbench.TileLocation.X)
-                    .ThenBy(chest => chest.Workbench.TileLocation.Y)
-                    .ToArray(),
-                Direction.West => WorkBenches
-                    .OrderBy(chest => chest.Workbench.TileLocation.Y)
-                    .ThenByDescending(chest => chest.Workbench.TileLocation.X)
+                SortDirection.Color => Chests
+                    .OrderBy(chest => chest.Chest.QualifiedItemId)
+                    .ThenBy(chest => chest.Chest.playerChoiceColor.Value.R)
+                    .ThenBy(chest => chest.Chest.playerChoiceColor.Value.G)
+                    .ThenBy(chest => chest.Chest.playerChoiceColor.Value.B)
                     .ToArray(),
                 _ => throw new ArgumentOutOfRangeException()
             };
@@ -74,10 +58,11 @@ public partial record StorageModel(string HeaderText, ChestModel[] Chests, Workb
     {
         Sort = Sort switch
         {
-            Direction.North => Direction.East,
-            Direction.East => Direction.South,
-            Direction.South => Direction.West,
-            Direction.West => Direction.North,
+            SortDirection.North => SortDirection.East,
+            SortDirection.East => SortDirection.South,
+            SortDirection.South => SortDirection.West,
+            SortDirection.West => SortDirection.Color,
+            SortDirection.Color => SortDirection.North,
             _ => throw new ArgumentOutOfRangeException()
         };
 
@@ -89,13 +74,17 @@ public partial record StorageModel(string HeaderText, ChestModel[] Chests, Workb
     {
         var chests =
             from chest in location.OfType<Chest>()
+            where chest.playerChest.Value
             select new ChestModel(chest);
 
-        var workBenches =
-            from workBench in location.OfType<Workbench>()
-            select new WorkbenchModel(workBench);
+        var buildings =
+            location.IsBuildableLocation()
+                ? from building in location.buildings
+                where building.HasIndoors() && building.daysOfConstructionLeft.Value <= 0
+                select new BuildingModel(building)
+                : Array.Empty<BuildingModel>();
 
-        return new StorageModel("Chests", chests.ToArray(), workBenches.ToArray());
+        return new StorageModel("Chests", chests.ToArray(), buildings.ToArray());
     }
 
     public static IClickableMenu CreateViewFromLocation(GameLocation location)

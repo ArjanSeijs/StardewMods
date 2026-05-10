@@ -16,14 +16,21 @@
             <image *case="1" layout="stretch stretch" sprite={@Mods/StardewUI/Sprites/SmallRightArrow} />  
             <image *case="2" layout="stretch stretch" sprite={@Mods/StardewUI/Sprites/SmallDownArrow} />  
             <image *case="3" layout="stretch stretch" sprite={@Mods/StardewUI/Sprites/SmallLeftArrow} />  
+            <image *case="4" layout="stretch stretch" sprite={@Item/(O)74} /> 
         </frame>
         <scrollable peeking="128">
+        <lane orientation="vertical">
+            <grid layout="stretch content" item-layout="length: 144" item-spacing="32,32"
+                                                  horizontal-item-alignment="middle">
+                               
+                
+                <lane *repeat={:Buildings} orientation="vertical" horizontal-content-alignment="middle"
+                                                       focusable="true">
+                                <include name="Mods/ShedMonitor/Views/BuildingView" *context={:this} />
+                                </lane>                   
+            </grid>
             <grid layout="stretch content" item-layout="length: 96" item-spacing="16,16"
                 horizontal-item-alignment="middle">
-                <lane *repeat={WorkbenchesSorted} orientation="vertical" horizontal-content-alignment="middle"
-                                      click=|Open()| focusable="true">
-                <include name="Mods/ShedMonitor/Views/WorkbenchDisplayView" *context={:this} />
-                </lane>
                 <lane *repeat={ChestsSorted} orientation="vertical" horizontal-content-alignment="middle"
                       tooltip={:DisplayName} click=|Open()| focusable="true">
 
@@ -31,6 +38,7 @@
                     
                 </lane>
             </grid>
+         </lane>
         </scrollable>
         </panel>
     </frame>

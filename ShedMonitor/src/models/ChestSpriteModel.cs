@@ -37,7 +37,7 @@ public record ChestSpriteModel(Chest Chest)
         var overlay = 0;
         switch (chest.QualifiedItemId)
         {
-            case "(BC)130":
+            case "(BC)130": // Chest
                 body = 0;
                 trim = 46;
                 overlay = 38;
@@ -51,7 +51,8 @@ public record ChestSpriteModel(Chest Chest)
                 trim = 8;
                 overlay = 0;
                 break;
-            case "(BC)256":
+            case "(BC)256": // Junimo
+            case "(BC)275": //hopper
                 trim = 0;
                 overlay = 0;
                 break;
