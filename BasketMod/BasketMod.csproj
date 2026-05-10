@@ -15,7 +15,7 @@
         <MinimumGameVersion>1.6</MinimumGameVersion>
         <MinimumApiVersion>4.5.2</MinimumApiVersion>
         <Version>1.0.1</Version>
-        <UpdateKeys>Nexus:12345</UpdateKeys>
+        <UpdateKeys>Nexus:45590</UpdateKeys>
     </PropertyGroup>
 
     <ItemGroup>
