@@ -15,9 +15,8 @@ public class Config
             save: () => mod.Helper.WriteConfig(ModEntry.Mod.Config));
 
         configMenu.AddBoolOption(mod.ModManifest,
-            name: () => "Use Custom Inventory Logic",
-            tooltip: () =>
-                "Disable this if you want the stack size to always be 999 or have issues with (modded) items losing data",
+            name: () => mod.Helper.Translation.Get("config.UseCustomInventoryLogic.name"),
+            tooltip: () => mod.Helper.Translation.Get("config.UseCustomInventoryLogic.description"),
             getValue: () => ModEntry.Mod.Config.UseCustomInventoryLogic,
             setValue: val => ModEntry.Mod.Config.UseCustomInventoryLogic = val);
 
@@ -26,8 +25,8 @@ public class Config
             var index = i;
             configMenu.AddKeybindList(
                 mod.ModManifest,
-                name: () => "Bag_" + index,
-                tooltip: () => "Open item in ",
+                name: () => mod.Helper.Translation.Get("config.Button.name", new {index}),
+                tooltip: () => mod.Helper.Translation.Get("config.Button.description"),
                 getValue: () => ModEntry.Mod.Config.Buttons[index] ?? new KeybindList(),
                 setValue: list => ModEntry.Mod.Config.Buttons[index] = list);
         }

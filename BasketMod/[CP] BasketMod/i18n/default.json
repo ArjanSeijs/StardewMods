@@ -1,4 +1,8 @@
 {
+  "config.DefaultSlotCapacity.name" : "DefaultSlotCapacity",
+  "config.DefaultSlotCapacity.description" : "The amount of inventory slots for the shoulderbag.",
+  "config.DefaultStackSize.name" : "DefaultStackSize",
+  "config.DefaultStackSize.description" : "The amount of items per slot for the shoulderbag.",
   "Basket.Displayname": "Shoulder Bag",
   "Basket.Description": "A Shoulder bag that can hold up to {{Total}} items.",
   "Cooler.Displayname": "Cooler",

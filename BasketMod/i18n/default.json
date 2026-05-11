@@ -1,0 +1,9 @@
+{
+  "command.basket": "basket_open <id> <slotCapacity?> <itemCapacity?>",
+  "command.recover": "Menu that stores items in case something goes wrong.",
+  "command.list": "basket_list_inventories <all?> ",
+  "config.UseCustomInventoryLogic.name": "Use Custom Inventory Logic",
+  "config.UseCustomInventoryLogic.description": "Disable this if you want the item stack size to always be 999 or have issues with (modded) items losing (attached item) data.",
+  "config.Button.name": "Keybind Bag {{Index}}",
+  "config.Button.description": "Keybind for opening bag in spacecore equipment slot."
+}

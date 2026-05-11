@@ -27,16 +27,16 @@ public class ModEntry : Mod
         Mod = this;
         Config = Helper.ReadConfig<Config>();
         RecoverInventory = new Inventory();
-        
+
         var commands = helper.ConsoleCommands;
-        commands.Add("basket_open", "basket_open <id> <slotCapacity?> <itemCapacity?>,", BasketCommand);
-        commands.Add("basket_recover", "Menu that stores items in case something goes wrong", BasketRecoverCommand);
-        commands.Add("basket_list_inventories", "basket_list_inventories <all?> ", ListInventoriesCommand);
-        
+        commands.Add("basket_open", helper.Translation.Get("command.basket"), BasketCommand);
+        commands.Add("basket_recover", helper.Translation.Get("command.recover"), BasketRecoverCommand);
+        commands.Add("basket_list_inventories", helper.Translation.Get("command.list"), ListInventoriesCommand);
+
         helper.Events.GameLoop.Saving += OnSaving;
         helper.Events.GameLoop.GameLaunched += OnGameLaunched;
         helper.Events.Input.ButtonPressed += OnButtonPressed;
-        
+
         Harmony();
     }
 
