@@ -67,7 +67,7 @@ public class BasketInventory : IInventory
     }
 
     /// <summary>
-    /// <see cref="StardewValley.Objects.Chest.grabItemFromChest"/>
+    /// Copy of <see cref="StardewValley.Objects.Chest.grabItemFromChest"/>
     /// </summary>
     /// <param name="item"></param>
     /// <param name="who"></param>
@@ -81,7 +81,7 @@ public class BasketInventory : IInventory
     }
 
     /// <summary>
-    /// <see cref="StardewValley.Objects.Chest.grabItemFromInventory"/>
+    /// Copy of <see cref="StardewValley.Objects.Chest.grabItemFromInventory"/>
     /// </summary>
     /// <param name="item"></param>
     /// <param name="who"></param>
@@ -116,6 +116,12 @@ public class BasketInventory : IInventory
         // In case something goes wrong
         ModEntry.Mod.RecoverInventory.RemoveEmptySlots();
         ModEntry.Mod.RecoverInventory.Insert(0, item);
+
+        if (!ModEntry.Mod.Config.UseCustomInventoryLogic)
+        {
+            return AddItemOriginal(item);
+        }
+        
         // Original Logic
         if (item.Stack <= ItemRemainingCapacity)
         {
@@ -126,6 +132,31 @@ public class BasketInventory : IInventory
         var (itemToAdd, rest1) = item.GetSplit(ItemRemainingCapacity);
         var rest2 = AddItemHelper(itemToAdd);
         return rest1.Add(rest2);
+    }
+
+    /// <summary>
+    /// Original <see cref="StardewValley.Objects.Chest.addItem"/> logic
+    /// </summary>
+    /// <param name="item"></param>
+    /// <returns></returns>
+    private Item? AddItemOriginal(Item item)
+    {
+        item.resetState();
+        Inventory.RemoveEmptySlots();
+        var itemsForPlayer = Inventory;
+        for (int index = 0; index < itemsForPlayer.Count; ++index)
+        {
+            if (itemsForPlayer[index] != null && itemsForPlayer[index].canStackWith((ISalable) item))
+            {
+                int amount = item.Stack - itemsForPlayer[index].addToStack(item);
+                if (item.ConsumeStack(amount) == null)
+                    return (Item) null;
+            }
+        }
+        if (itemsForPlayer.Count >= SlotCapacity)
+            return item;
+        itemsForPlayer.Add(item);
+        return (Item) null;
     }
 
     /// <summary>
