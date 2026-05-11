@@ -17,7 +17,13 @@ public static class Extensions
     {
         var copy = item.getOne();
         copy.Stack = Math.Min(amount, item.maximumStackSize());
-        return copy;
+        if (item is not Tool tool || copy is not Tool toolCopy) return copy;
+        
+        for (var i = 0; i < tool.attachmentSlots(); i++)
+        {
+            toolCopy.attachments[i] = tool.attachments[i];
+        }
+        return toolCopy;
     }
 
     /// <summary>
@@ -102,5 +108,4 @@ public static class Extensions
         if (inventory == null) return onNull;
         return !inventory.HasAny();
     }
-
 }
