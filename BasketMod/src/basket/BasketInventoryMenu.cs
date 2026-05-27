@@ -39,7 +39,7 @@ public static class BasketInventoryMenu
             null,
             inventory.GrabItemFromChest,
             canBeExitedWithKey: true,
-            showOrganizeButton: false, //Organise & Stack Does not yet support custom logic
+            showOrganizeButton: !ModEntry.Mod.Config.UseCustomInventoryLogic, //Organise & Stack Does not yet support custom logic
             source: 1,
             sourceItem: new BasketInventoryProxy(inventory),
             context: inventory.Source);

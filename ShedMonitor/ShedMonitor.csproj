@@ -15,7 +15,6 @@
         <UniqueID>EternalSoap.ShedMonitor</UniqueID>
         <MinimumGameVersion>1.6</MinimumGameVersion>
         <MinimumApiVersion>4.5.2</MinimumApiVersion>
-        <UpdateKeys>Nexus:12345</UpdateKeys>
         <RootNamespace>ShedMonitor</RootNamespace>
     </PropertyGroup>
 

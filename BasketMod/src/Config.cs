@@ -34,5 +34,5 @@ public class Config
 
     public KeybindList?[] Buttons = new KeybindList[SpaceCoreEquipment.MaxSlots];
 
-    public bool UseCustomInventoryLogic = true;
+    public bool UseCustomInventoryLogic;
 }

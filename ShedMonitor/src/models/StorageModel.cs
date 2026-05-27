@@ -5,7 +5,7 @@ using StardewValley.Objects;
 
 namespace ShedMonitor.Models;
 
-public partial record StorageModel(string HeaderText, ChestModel[] Chests, BuildingModel[] Buildings)
+public partial record StorageModel(string HeaderText, string LocationId, ChestModel[] Chests, BuildingModel[] Buildings)
 {
     public enum SortDirection
     {
@@ -16,8 +16,11 @@ public partial record StorageModel(string HeaderText, ChestModel[] Chests, Build
         Color
     }
 
-    [Notify] private SortDirection _sort = _lastSort;
-    private static SortDirection _lastSort = SortDirection.East;
+    [Notify] private SortDirection _sort = LastSort.ContainsKey(LocationId)
+        ? LastSort[LocationId]
+        : SortDirection.Color;
+
+    private static readonly Dictionary<string, SortDirection> LastSort = new();
 
     //TODO Improve
     [DependsOn(nameof(Sort))]
@@ -66,7 +69,7 @@ public partial record StorageModel(string HeaderText, ChestModel[] Chests, Build
             _ => throw new ArgumentOutOfRangeException()
         };
 
-        _lastSort = Sort;
+        LastSort[LocationId] = Sort;
         Game1.playSound("shwip");
     }
 
@@ -81,10 +84,12 @@ public partial record StorageModel(string HeaderText, ChestModel[] Chests, Build
             location.IsBuildableLocation()
                 ? from building in location.buildings
                 where building.HasIndoors() && building.daysOfConstructionLeft.Value <= 0
+                where (from chest in building.GetIndoors().OfType<Chest>() where chest.playerChest.Value select chest)
+                    .Any()
                 select new BuildingModel(building)
                 : Array.Empty<BuildingModel>();
 
-        return new StorageModel("Chests", chests.ToArray(), buildings.ToArray());
+        return new StorageModel("Chests", location.NameOrUniqueName, chests.ToArray(), buildings.ToArray());
     }
 
     public static IClickableMenu CreateViewFromLocation(GameLocation location)
