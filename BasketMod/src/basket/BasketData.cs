@@ -40,7 +40,7 @@ public struct BasketData
     {
         var data = item.modData;
         var toolData = item.GetToolData().ModData;
-        if (!data.TryGetValue(QualifiedName.Field.BasketId, out var inventoryId) || inventoryId.Equals("-1"))
+        if (!data.TryGetValue(QualifiedName.Field.BasketId, out var inventoryId) || inventoryId == null || inventoryId.Equals("-1"))
         {
             inventoryId = QualifiedName.InventoryName(Guid.NewGuid().ToString());
             data[QualifiedName.Field.BasketId] = inventoryId;
@@ -48,9 +48,9 @@ public struct BasketData
 
         GlobalInventoryId = inventoryId;
         
-        var slotCapacity = toolData.GetValueOrDefault(QualifiedName.Field.SlotCapacity).ToInt() ?? 9;
-        var itemCapacity = toolData.GetValueOrDefault(QualifiedName.Field.ItemCapacity).ToInt() ?? int.MaxValue;
-        var stackCapacity = toolData.GetValueOrDefault(QualifiedName.Field.StackCapacity).ToInt() ?? 999;
+        var slotCapacity = toolData.GetValueOrDefault(QualifiedName.Field.SlotCapacity)?.ToInt() ?? 9;
+        var itemCapacity = toolData.GetValueOrDefault(QualifiedName.Field.ItemCapacity)?.ToInt() ?? int.MaxValue;
+        var stackCapacity = toolData.GetValueOrDefault(QualifiedName.Field.StackCapacity)?.ToInt() ?? 999;
         SlotCapacity = Math.Clamp(slotCapacity, 2, 12 * 3);
         ItemCapacity = Math.Clamp(itemCapacity, 1, int.MaxValue);
         StackCapacity = Math.Clamp(stackCapacity, 1, int.MaxValue);
