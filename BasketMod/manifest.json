@@ -10,7 +10,7 @@
   "UniqueID": "EternalSoap.BasketMod",
   "Name": "BasketMod",
   "Author": "EternalSoap",
-  "Version": "1.0.4",
+  "Version": "1.0.5",
   "Description": "Adds usable baskets to the game",
   "MinimumApiVersion": "4.5.2",
   "MinimumGameVersion": "1.6",
@@ -18,7 +18,7 @@
   "Dependencies": [
     {
       "UniqueID": "EternalSoap.BasketMod.CP",
-      "MinimumVersion": "1.0.1"
+      "MinimumVersion": "1.0.5"
     },
     {
       "UniqueID": "Pathoschild.ContentPatcher",

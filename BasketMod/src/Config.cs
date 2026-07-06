@@ -20,6 +20,12 @@ public class Config
             getValue: () => ModEntry.Mod.Config.UseCustomInventoryLogic,
             setValue: val => ModEntry.Mod.Config.UseCustomInventoryLogic = val);
 
+        configMenu.AddBoolOption(mod.ModManifest,
+            name: () => mod.Helper.Translation.Get("config.ItemBasketTooltip.name"),
+            tooltip: () => mod.Helper.Translation.Get("config.ItemBasketTooltip.description"),
+            getValue: () => ModEntry.Mod.Config.ItemBasketTooltip,
+            setValue: val => ModEntry.Mod.Config.ItemBasketTooltip = val);
+
         for (var i = 0; i < SpaceCoreEquipment.MaxSlots; i++)
         {
             var index = i;
@@ -35,4 +41,5 @@ public class Config
     public KeybindList?[] Buttons = new KeybindList[SpaceCoreEquipment.MaxSlots];
 
     public bool UseCustomInventoryLogic;
+    public bool ItemBasketTooltip = true;
 }

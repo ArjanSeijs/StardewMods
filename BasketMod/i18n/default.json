@@ -4,6 +4,8 @@
   "command.list": "basket_list_inventories <all?> ",
   "config.UseCustomInventoryLogic.name": "Use Custom Inventory Logic",
   "config.UseCustomInventoryLogic.description": "Disable this if you want the item stack size to always be 999 or have issues with (modded) items losing (attached item) data.",
+  "config.ItemBasketTooltip.name": "Custom Basket Tooltip",
+  "config.ItemBasketTooltip.description": "Show the items currently in the basket in the item tooltip. Disable this if you experience issues with modded items",
   "config.Button.name": "Keybind Bag {{Index}}",
   "config.Button.description": "Keybind for opening bag in spacecore equipment slot."
 }

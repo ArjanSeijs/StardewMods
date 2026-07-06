@@ -79,6 +79,7 @@ public static class BasketToolPatch
         }
     }
 
+    private static int _errorCounter;
     /// <summary>
     /// 
     /// </summary>
@@ -94,6 +95,7 @@ public static class BasketToolPatch
     {
         try
         {
+            if(!ModEntry.Mod.Config.ItemBasketTooltip) return;
             var basket = __instance.AsBasket();
             if (basket is null) return;
 
@@ -114,7 +116,12 @@ public static class BasketToolPatch
         }
         catch (Exception e)
         {
-            ModEntry.Mod.Monitor.Log(e.ToString(), LogLevel.Error);
+            if (_errorCounter < 20)
+            {
+                ModEntry.Mod.Monitor.Log("Failed DrawToolTip_PostFix for" + __instance?.QualifiedItemId ?? "<NULL>", LogLevel.Error);
+                ModEntry.Mod.Monitor.Log(e.ToString(), LogLevel.Error);
+                _errorCounter++;
+            }
         }
     }
 
@@ -136,13 +143,19 @@ public static class BasketToolPatch
     {
         try
         {
+            if(!ModEntry.Mod.Config.ItemBasketTooltip) return;
             var basket = __instance.AsBasket();
             if (basket is null) return;
             if (new BasketInventory(basket.Value).Count > 0) __result += new Point(0, 64);
         }
         catch (Exception e)
         {
-            ModEntry.Mod.Monitor.Log(e.ToString(), LogLevel.Error);
+            if (_errorCounter < 20)
+            {
+                ModEntry.Mod.Monitor.Log("Failed SpaceNeeded_PostFix for" + __instance?.QualifiedItemId ?? "<NULL>", LogLevel.Error);
+                ModEntry.Mod.Monitor.Log(e.ToString(), LogLevel.Error);
+                _errorCounter++;
+            }
         }
     }
 }
