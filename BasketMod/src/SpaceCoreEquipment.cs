@@ -1,6 +1,8 @@
 ﻿using BasketMod.api;
 using BasketMod.basket;
 using Microsoft.Xna.Framework.Graphics;
+using StardewModdingAPI;
+using StardewModdingAPI.Events;
 using StardewValley;
 
 namespace BasketMod;
@@ -29,12 +31,13 @@ public static class SpaceCoreEquipment
         return arg is null || arg.IsBasket() || arg.IsSpecial();
     }
 
-    public static void OnButtonPressed(ModEntry modEntry, ISpaceCoreApi spacecore)
+    public static void OnButtonPressed(ModEntry modEntry, ButtonPressedEventArgs buttonPressedEventArgs, ISpaceCoreApi spacecore)
     {
         for (var i = 0; i < MaxSlots; i++)
         {
             var keybind = ModEntry.Mod.Config.Buttons[i]?.IsDown() ?? false;
-            var item = spacecore.GetItemInEquipmentSlot(Game1.player, QualifiedName.SpaceCoreSlot(i));
+            var farmer = Context.IsMainPlayer ? Game1.player : Game1.getPlayerOrEventFarmer();
+            var item = spacecore.GetItemInEquipmentSlot(farmer, QualifiedName.SpaceCoreSlot(i));
             if (!keybind || item is null) continue;
             var basket = item.AsBasket();
             if (basket is not null)

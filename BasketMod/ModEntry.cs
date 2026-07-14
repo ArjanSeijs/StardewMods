@@ -43,7 +43,7 @@ public class ModEntry : Mod
     private void OnButtonPressed(object? sender, ButtonPressedEventArgs e)
     {
         if (_spacecore is null) return;
-        SpaceCoreEquipment.OnButtonPressed(this, _spacecore);
+        SpaceCoreEquipment.OnButtonPressed(this, e, _spacecore);
     }
 
     private void OnGameLaunched(object? sender, GameLaunchedEventArgs e)
